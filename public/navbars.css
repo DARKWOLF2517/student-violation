@@ -1,0 +1,109 @@
+.top-nav {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background-color: #F4CE14;
+    color: #ffffff;
+    padding: 0.875rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.125rem;
+
+}
+
+
+.top-nav .notification-button {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 0.625rem;
+}
+.top-nav .profile-dropdown .profile-name {
+    margin-right: 0.3125rem;
+}
+.rotate-icon .fas.fa-chevron-down {
+    transition: transform 0.5s ease-in-out;
+}
+
+.rotate-icon.collapsed .fas.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.rotate-icon:not(.collapsed) .fas.fa-chevron-down {
+    transform: rotate(0deg);
+}
+
+.btn-toggle-nav {
+    align-items: center;
+    margin-left: 30px;
+}
+
+.btn-toggle-nav i{
+    color: #45474B;
+}
+.btn-toggle-nav li {
+    width: 100%;
+}
+
+
+.link-dark {
+    text-decoration: none;
+}
+
+
+.btn-toggle {
+display: flex;
+width: 200px;
+margin-bottom: 10px;
+padding-left: 0;
+}
+.link-title {
+color: #45474B;
+display: inline-block;
+transition: margin-left 0.3s ease-in-out, opacity 0.3s ease-in-out;
+margin-left: 10px;
+}
+.btn-toggle .link-title {
+    margin-right: 10px;
+}
+
+.btn-toggle .link-arrow {
+margin-left: auto;
+}
+.btn-toggle .fas {
+margin-left: 10px;
+margin-right: 0;
+}
+
+.sidebar {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 230px;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    overflow-y: auto;
+    transition: width 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    width: 53px;
+}
+.sidebar i{
+    color: #45474B;
+}
+
+.sidebar.collapsed + .content {
+    margin-left: 70px;
+}
+
+.toggle-button {
+    background-color: white;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+}

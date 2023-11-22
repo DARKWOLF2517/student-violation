@@ -15,7 +15,7 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
         if (Auth::attempt($credentials)) {
-            
+
             //if the user has only ONE org or role
             $userRoles = UserRoles::where('user_id', Auth::id())->first();
             // dd($userOrganization->organization->name);
@@ -40,6 +40,7 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+        // return $request;
         // return $request;
     }
 

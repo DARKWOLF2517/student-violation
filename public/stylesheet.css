@@ -1,0 +1,260 @@
+body {
+    background-color: #F5F7F8;
+    font-family: sans-serif;
+
+}
+
+.content {
+    margin-left: 230px;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.key-features-container{
+    margin-top: 10px;
+}
+.v3_26 {
+    position: relative;
+    background: url('https://www.cmu.edu.ph/wp-content/uploads/2021/04/vlcsnap-2013-11-29-14h20m46s197-660x330.png') center/cover;
+    padding: 60px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 50px;
+    margin-bottom: auto;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+.v3_28, .v3_29 {
+    color: white;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.v3_28 {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.v3_29 {
+    font-size: 16px;
+}
+
+#statistic{
+    align-items: center;
+}
+.statistic {
+padding: 10px;
+margin-left: 3px;
+margin-top: 5px;
+width: 100%;
+background-color: #ffffff;
+border-radius: 10px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+color: #000000;
+font-size: small;
+padding-left: 10px;
+margin-bottom: 5px;
+}
+
+.stat-number {
+font-size: 25px;
+color: #000000;
+margin-left: 10px;
+}
+  .card-text{
+    margin-left: 20px;
+}
+.key-features-title {
+            text-align: center;
+            font-size: 24px;
+            padding: 10px;
+        }
+
+        .feature-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            height: 30vh;
+        }
+
+        .feature {
+            width: 208px;
+            background-size: cover;
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            color: #495E57;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            color: rgba(0, 0, 0, 1);
+            font-family: Roboto;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            color: rgba(0, 0, 0, 0.5);
+            font-family: Roboto;
+            font-weight: regular;
+            font-size: 16px;
+        }
+        .card{
+            background-color: #ffffff;
+border-radius: 10px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+border: none;
+        }
+        .toggle-button i{
+            margin-left: 0;
+        }
+        img,
+i {
+    margin-left: 10px; /* Adjust this value as needed */
+}
+
+/* Violation Slip */
+.card-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    height: 90vh;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+.breadcrumbs{
+margin-top: 40px;
+background-color: white;
+border: 1px solid rgb(255, 255, 255);
+border-radius: 5px;
+}
+.breadcrumbs{
+margin-top: 45px;
+padding: 5px;
+box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+background-color: #ffffff;
+}
+.select-dropdown{
+border-radius: 10px;
+margin-top: 10px;
+width: 40%;
+position: relative;
+box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.select-dropdown select {
+width: 100%;
+height: 80%;
+padding: 10px;
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+cursor: pointer;
+text-align: center;
+border: none;
+background-color: white;
+}
+
+.select-dropdown::after {
+content: '\25BC';
+font-size: 12px;
+position: absolute;
+top: 50%;
+right: 10px;
+transform: translateY(-50%);
+pointer-events: none;
+}
+.input-container {
+position: relative;
+}
+
+.input-container i {
+position: absolute;
+left: 10px;
+top: 50%;
+transform: translateY(-50%);
+}
+
+.input-container input {
+padding-left: 30px;
+width: 70%;
+height: 90%;
+border-radius: 15px;
+border: none;
+background-color: white;
+box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+.sort-btn{
+font-size: 20px;
+border: none;
+background-color: #ffffff;
+box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+margin-right: 2px;
+height: auto;
+border-radius: 10px;
+
+}
+.select-dropdown {
+width: 50%;
+margin-bottom: 10px;
+}
+.head-container {
+display: flex;
+width: 100%;
+justify-content: space-between;
+align-items: center;
+}
+
+.input-container input {
+width: 100%;
+height: 50px;
+}
+.table {
+width: 100%;
+margin-top: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container {
+height: 75vh;
+        max-height: 75vh;
+        overflow-y: auto;
+    }
+    .table thead th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }

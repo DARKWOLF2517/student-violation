@@ -32,25 +32,25 @@ data() {
 
     };
 },
-mounted() { 
+mounted() {
     console.log("mounted")
 },
 methods:{
     login() {
         axios.post('/authenticate_user', this.form)
             .then(response => {
-                // if(response.data == 1){
-                //     window.location.href = '/login/org_dashboard';
-                // }
-                // else if(response.data == 2){
-                //     window.location.href = 'student_attendance';
-                // }
-                // else if(response.data == 3){
-                //     window.location.href = '/login/options';
-                // }
-                // else if(response.data == 'error'){
-                //     this.error = '1';
-                // }
+                if(response.data == 1){
+                    window.location.href = '/admin_dashboard';
+                }
+                else if(response.data == 2){
+                    window.location.href = 'student_attendance';
+                }
+                else if(response.data == 3){
+                    window.location.href = '/login/options';
+                }
+                else if(response.data == 'error'){
+                    this.error = '1';
+                }
                 console.log(response.data);
             })
             .catch(error => {

@@ -34,4 +34,9 @@ Route::get('/users', function () {
     return view('users');
 });
 
+Route::get('/testimonial', function () {
+    return view('testimonial');
+});
+
+
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);

@@ -1,12 +1,12 @@
 @extends('SideNavBar')
-@section('main-content') 
+@section('main-content')
 <div class="content">
     <div class="breadcrumbs">
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/login/org_dashboard">Dashboard</a></li>
             <li class="breadcrumb-item">Violation Officer</li>
-            <li class="breadcrumb-item active" aria-current="page">Records</li>
+            <li class="breadcrumb-item active" aria-current="page">Testimonial</li>
         </ol>
         </nav>
     </div>
@@ -39,7 +39,7 @@
                     </select>
                 </div>
             </div>
-            <h4> <i class="fas fa-list mt-2"></i>  Users</h4>
+            <h4> <i class="fas fa-list mt-2"></i>  Testimonies</h4>
                 <div class="student-buttons d-flex justify-content-end">
                     <div class="btn-group" role="group">
                         <!-- <button class="btn me-2" id="add-student-list-button" onclick="printTableData()">
@@ -69,48 +69,14 @@
             <td>Too cute</td>
             <td>Active</td>
             <td>
-                <div class="btn-group" role="group" aria-label="Action buttons">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">Edit</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                <div class="btn-group" role="group" aria-label="Action button">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">View Testimony</button>
                 </div>
             </td>
         </tbody>
       </table>
 </div>
 </div>
-    </div>
-</div>
-
-<!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Student Information</h5>
-            </div>
-            <div class="modal-body">
-                <!-- Use dropdowns instead of input fields -->
-                <p>Student Name: Queen Bahay Gwapa</p>
-                <p>Violations:
-                    <select class="form-control">
-                        <option value="Too cute" selected>Too cute</option>
-                        <option value="Other violation">Other violation</option>
-                        <!-- Add more options as needed -->
-                    </select>
-                </p>
-                <p>Status:
-                    <select class="form-control">
-                        <option value="Active" selected>Active</option>
-                        <option value="Inactive">Inactive</option>
-                        <!-- Add more options as needed -->
-                    </select>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
     </div>
 </div>
 

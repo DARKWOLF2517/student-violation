@@ -62,15 +62,6 @@
                                 </a>
                             </button>
                         </li>
-
-                        <li class="mb-1">
-                            <button class="btn btn-toggle align-items-center rounded events-button">
-                                <i class="fas fa-file-alt"></i>
-                                <a href="/testimonial">
-                                <span class="link-title">Testimonies</span>
-                                </a>
-                            </button>
-                        </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded events-button">
                                 <i class="fas fa-list-alt"></i>

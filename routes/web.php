@@ -24,9 +24,6 @@ Route::get('/admin_dashboard', function () {
     return view('DashboardAdmin');
 });
 
-Route::get('/create_violationslip', function () {
-    return view('ViolationSlip');
-});
 
 Route::get('/violation_records', function () {
     return view('ViolationRecords');
@@ -35,11 +32,6 @@ Route::get('/violation_records', function () {
 Route::get('/users', function () {
     return view('users');
 });
-
-Route::get('/testimonial', function () {
-    return view('testimonial');
-});
-
 
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
 

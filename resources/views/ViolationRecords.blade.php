@@ -43,6 +43,7 @@
             <h4> <i class="fas fa-list mt-2"></i>  Users</h4>
                 <div class="student-buttons d-flex justify-content-end">
                     <div class="btn-group" role="group">
+
                         <button class="btn me-2" data-toggle="modal" data-target="#myModal">
                             <i class="fas fa-plus"></i> Add new Violation
                         </button>
@@ -59,7 +60,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Student Name</th>
                         <th scope="col">Violations</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Violation Status</th>
+                        <th scope="col">Testimony</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -67,12 +69,19 @@
                         <tr>
                             <th scope="row">1</th>
                             <td>Queen Bahay Gwapa</td>
-                            <td>Too cute</td>
+                            <td>Drunkenness</td>
                             <td>Active</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"> View</i></button>
+                                    <button type="button" class="btn"  data-toggle="modal" data-target="#addTestimonyModal"><i class="fas fa-plus"></i> Add</button>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Action buttons">
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#editModal"> <i class="fas fa-pen"></i> Edit</button>
+                                    <button type="button" class="btn"><i class="fas fa-trash"></i> Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -91,11 +100,17 @@
                             <div class="modal-body">
                                 <!-- Use dropdowns instead of input fields -->
                                 <p>Student Name: Queen Bahay Gwapa</p>
-                                <p>Violations:
+                                <p>Violation:
                                     <select class="form-control">
-                                        <option value="Too cute" selected>Too cute</option>
-                                        <option value="Other violation">Other violation</option>
-                                        <!-- Add more options as needed -->
+                                        <option value="NonWearingID">Non-wearing of School ID</option>
+                                        <option value="Littering">Littering</option>
+                                        <option value="GoodGrooming">Good Grooming</option>
+                                        <option value="Vandalism">Vandalism</option>
+                                        <option value="Smoking">Smoking</option>
+                                        <option value="OverSpeeding">Over Speeding</option>
+                                        <option value="Drunkenness">Drunkenness</option>
+                                        <option value="Contraband">Possession of Contraband</option>
+                                        <option value="Others">Others (Please specify)</option>
                                     </select>
                                 </p>
                                 <p>Status:
@@ -200,6 +215,94 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- View testimony Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewModalLabel">Student Testimony</h5>
+            </div>
+            <div class="modal-body">
+    <p><strong>Student Name:</strong> Queen Bahay Gwapa</p>
+
+    <div class="form-group mb-3">
+        <label for="violationOfficer">Violation Officer:</label>
+        <input type="text" class="form-control" id="violationOfficer" placeholder="Enter Violation Officer's Name">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="disciplineOfficer">Discipline Officer:</label>
+        <input type="text" class="form-control" id="disciplineOfficer" placeholder="Enter Discipline Officer's Name">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="typeOfViolation">Type of Violation:</label>
+        <input type="text" class="form-control" id="typeOfViolation" placeholder="Drunkenness" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="violationDescription">Description:</label>
+        <textarea class="form-control" id="violationDescription" rows="3" placeholder="Enter Description of the Violation"></textarea>
+    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Testimony Modal -->
+<div class="modal" id="addTestimonyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Testimony</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Name of Student</label>
+                        <input type="text" class="form-control" id="studentName" name="studentName" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="violationOfficer" class="form-label">Name of Violation Officer</label>
+                        <input type="text" class="form-control" id="violationOfficer" name="violationOfficer" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="violationTypeGiven" class="form-label">Type of Violation Given</label>
+                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="testimonyDetails" class="form-label">Testimony Details</label>
+                        <textarea class="form-control" id="testimonyDetails" name="testimonyDetails" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="decision" class="form-label">Decision</label>
+                        <select class="form-select" id="decision" name="decision" required>
+                            <option value="Approved">Testimony of Student Approved</option>
+                            <option value="Declined">Testimony of Student Declined</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="approvedBy" class="form-label">Approved By</label>
+                        <input type="text" class="form-control" id="approvedBy" name="approvedBy" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
 
         </div>

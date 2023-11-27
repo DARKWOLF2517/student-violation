@@ -87,8 +87,29 @@
                 <h5 class="modal-title" id="viewModalLabel">Student Testimony</h5>
             </div>
             <div class="modal-body">
-                <!-- Add the content of the testimony here -->
-                <p>Testimony content goes here...</p>
+                <h5>Student Information</h5>
+                <p><strong>Student Name:</strong> Queen Bahay Gwapa</p>
+
+                <h5>Violation Details</h5>
+                <div class="form-group">
+                    <label for="violationOfficer">Violation Officer:</label>
+                    <input type="text" class="form-control" id="violationOfficer" placeholder="Enter Violation Officer's Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="disciplineOfficer">Discipline Officer:</label>
+                    <input type="text" class="form-control" id="disciplineOfficer" placeholder="Enter Discipline Officer's Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="typeOfViolation">Type of Violation:</label>
+                    <input type="text" class="form-control" id="typeOfViolation" placeholder="Enter Type of Violation">
+                </div>
+
+                <div class="form-group">
+                    <label for="violationDescription">Description:</label>
+                    <textarea class="form-control" id="violationDescription" rows="3" placeholder="Enter Description of the Violation"></textarea>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

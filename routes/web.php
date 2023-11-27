@@ -46,3 +46,4 @@ Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
 
 //admin route
 Route::get('/users_get', [UserController::class, 'getUsers']);
+Route::post('/create_user', [UserController::class, 'createUser']);

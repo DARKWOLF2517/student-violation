@@ -13,12 +13,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="navbars.css">
     <link rel="stylesheet" href="stylesheet.css">
+
+    @yield('custom-style')
 </head>
 <body>
     <div id="app">
         <!-- TOP NAV BAR -->
         <div class="wrapper">
-
             <div class="top-nav">
 
                 <a href="#" class="nav-link link-light">
@@ -38,11 +39,9 @@
                         <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
                 </div>
-
-
+            </div>
         </div>
-    </div>
-<!-- SIDE NAV BAR -->
+        <!-- SIDE NAV BAR -->
         <div class="wrapper">
             <div class=" p-3  sidebar" id="sidebarCollapse">
                 <div class="d-md-flex flex-shrink-0">
@@ -55,41 +54,53 @@
                                 </a>
                             </button>
                         </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded dashboard-button">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <a href="/admin_dashboard">
-                            <span class="link-title">Dashboard</span>
-                            </a>
-                        </button>
-                    </li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded dashboard-button">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <a href="/admin_dashboard">
+                                <span class="link-title">Dashboard</span>
+                                </a>
+                            </button>
+                        </li>
 
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded events-button">
-                            <i class="fas fa-file-alt"></i>
-                            <a href="/create_violationslip">
-                            <span class="link-title">Violation Slip</span>
-                            </a>
-                        </button>
-                    </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded events-button">
-                            <i class="fas fa-list-alt"></i>
-                            <a href="/violation_records">
-                            <span class="link-title">Violation Records</span>
-                            </a>
-                        </button>
-                    </li>
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center studentlist-button">
-                            <i class="fas fa-address-card"></i>
-                            <a href="/users">
-                            <span class="link-title">Users</span>
-                            </a>
-                        </button>
-                    </li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded events-button">
+                                <i class="fas fa-file-alt"></i>
+                                <a href="/create_violationslip">
+                                <span class="link-title">Violation Slip</span>
+                                </a>
+                            </button>
+                        </li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded events-button">
+                                <i class="fas fa-list-alt"></i>
+                                <a href="/violation_records">
+                                <span class="link-title">Violation Records</span>
+                                </a>
+                            </button>
+                        </li>
+                        <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center studentlist-button">
+                                <i class="fas fa-address-card"></i>
+                                <a href="/users">
+                                <span class="link-title">Users</span>
+                                </a>
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
+        </div>
+
+        <div>
+            @yield('main-content')
+        </div>
+
+        @yield('custom-script')
+        {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Bootstrap JS Bundle (Popper included) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+
+    </div>
 </body>
 </html>

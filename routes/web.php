@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +37,7 @@ Route::get('/users', function () {
 });
 
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
+
+
+//admin route
+Route::get('/users_get', [UserController::class, 'getUsers']);

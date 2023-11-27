@@ -5,39 +5,39 @@
     <div class="container card-container">
         <h2 class="text-center">Violation Report Slip</h2>
         <form>
-          <div class="mb-3">
-            <label for="college" class="form-label">College</label>
-            <select class="form-select" id="college" name="college" required>
-                <option value="" selected disabled>Select College</option>
-                <option value="College1">College 1</option>
-                <option value="College2">College 2</option>
-                <option value="College3">College 3</option>
-                <!-- Add more colleges as needed -->
-            </select>
-        </div>
+            <div class="mb-3">
+                <label for="college" class="form-label">College</label>
+                <select class="form-select" id="college" name="college" required>
+                    <option value="" selected disabled>Select College</option>
+                    <option value="College1">College 1</option>
+                    <option value="College2">College 2</option>
+                    <option value="College3">College 3</option>
+                    <!-- Add more colleges as needed -->
+                </select>
+            </div>
 
-        <div class="flex-container">
-          <div class="mb-3">
-              <label for="dateFiled" class="form-label">Date Filed</label>
-              <input type="date" class="form-control" id="dateFiled" name="dateFiled" required>
-          </div>
+            <div class="flex-container">
+                <div class="mb-3">
+                    <label for="dateFiled" class="form-label">Date Filed</label>
+                    <input type="date" class="form-control" id="dateFiled" name="dateFiled" required>
+                </div>
 
-          <div class="mb-3">
-              <label for="dateViolation" class="form-label">Date Violation</label>
-              <input type="date" class="form-control" id="dateViolation" name="dateViolation" required>
-          </div>
+                <div class="mb-3">
+                        <label for="dateViolation" class="form-label">Date Violation</label>
+                        <input type="date" class="form-control" id="dateViolation" name="dateViolation" required>
+                </div>
 
-          <div class="mb-3">
-              <label for="time" class="form-label">Time</label>
-              <input type="time" class="form-control" id="time" name="time" required>
-          </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time</label>
+                    <input type="time" class="form-control" id="time" name="time" required>
+                </div>
 
 
-      </div>
-      <div class="mb-3">
-        <label for="place" class="form-label">Place</label>
-        <input type="text" class="form-control" id="place" name="place" required>
-    </div>
+            </div>
+            <div class="mb-3">
+                <label for="place" class="form-label">Place</label>
+                <input type="text" class="form-control" id="place" name="place" required>
+            </div>
 
             <div class="mb-3">
                 <label for="studentName" class="form-label">Name of Student</label>
@@ -73,8 +73,10 @@
                 <label for="reportingAuthority" class="form-label">Name of Reporting Authority</label>
                 <input type="text" class="form-control" id="reportingAuthority" name="reportingAuthority" required>
             </div>
-
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
+
+@endsection
+

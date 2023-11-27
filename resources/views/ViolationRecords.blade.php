@@ -1,4 +1,5 @@
 @extends('SideNavBar')
+
 @section('main-content')
 <div class="content">
     <div class="breadcrumbs">
@@ -51,69 +52,73 @@
                     </div>
                 </div>
 
-<div class="table-container">
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">Violations</th>
-            <th scope="col">Status</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Queen Bahay Gwapa</td>
-            <td>Too cute</td>
-            <td>Active</td>
-            <td>
-                <div class="btn-group" role="group" aria-label="Action buttons">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">Edit</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </div>
-            </td>
-        </tbody>
-      </table>
-</div>
-</div>
-    </div>
-</div>
-
-<!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Student Information</h5>
-            </div>
-            <div class="modal-body">
-                <!-- Use dropdowns instead of input fields -->
-                <p>Student Name: Queen Bahay Gwapa</p>
-                <p>Violations:
-                    <select class="form-control">
-                        <option value="Too cute" selected>Too cute</option>
-                        <option value="Other violation">Other violation</option>
-                        <!-- Add more options as needed -->
-                    </select>
-                </p>
-                <p>Status:
-                    <select class="form-control">
-                        <option value="Active" selected>Active</option>
-                        <option value="Inactive">Inactive</option>
-                        <!-- Add more options as needed -->
-                    </select>
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="table-container">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Violations</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Queen Bahay Gwapa</td>
+                            <td>Too cute</td>
+                            <td>Active</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Action buttons">
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">Edit</button>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+                <!-- Edit Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editModalLabel">Edit Student Information</h5>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Use dropdowns instead of input fields -->
+                                <p>Student Name: Queen Bahay Gwapa</p>
+                                <p>Violations:
+                                    <select class="form-control">
+                                        <option value="Too cute" selected>Too cute</option>
+                                        <option value="Other violation">Other violation</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </p>
+                                <p>Status:
+                                    <select class="form-control">
+                                        <option value="Active" selected>Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 </div>
 
+@endsection
+
+@section('custom-script')
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+@endsection

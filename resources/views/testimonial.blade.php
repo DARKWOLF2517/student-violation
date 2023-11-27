@@ -39,7 +39,7 @@
                     </select>
                 </div>
             </div>
-            <h4> <i class="fas fa-list mt-2"></i>  Testimonies</h4>
+            <h4> <i class="fas fa-list mt-2"></i>  Testimony</h4>
                 <div class="student-buttons d-flex justify-content-end">
                     <div class="btn-group" role="group">
                         <!-- <button class="btn me-2" id="add-student-list-button" onclick="printTableData()">
@@ -54,32 +54,48 @@
 <div class="table-container">
     <table class="table table-hover">
         <thead>
-          <tr>
+        <tr>
             <th scope="col">#</th>
             <th scope="col">Student Name</th>
             <th scope="col">Violations</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
-          </tr>
+        </tr>
         </thead>
         <tbody>
-          <tr>
+        <tr>
             <th scope="row">1</th>
             <td>Queen Bahay Gwapa</td>
             <td>Too cute</td>
             <td>Active</td>
             <td>
                 <div class="btn-group" role="group" aria-label="Action button">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">View Testimony</button>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#viewModal">View Testimony</button>
                 </div>
             </td>
         </tbody>
-      </table>
+    </table>
 </div>
 </div>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewModalLabel">Student Testimony</h5>
+            </div>
+            <div class="modal-body">
+                <!-- Add the content of the testimony here -->
+                <p>Testimony content goes here...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

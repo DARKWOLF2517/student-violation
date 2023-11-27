@@ -73,7 +73,10 @@
                 <label for="reportingAuthority" class="form-label">Name of Reporting Authority</label>
                 <input type="text" class="form-control" id="reportingAuthority" name="reportingAuthority" required>
             </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
         </form>
     </div>
 </div>

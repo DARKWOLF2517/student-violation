@@ -1,6 +1,7 @@
-@extends('SideNavBar')
+@extends('admin.admin_navigation_bar')
 
 @section('main-content')
+
 <div class="content">
     <div class="breadcrumbs">
         <nav aria-label="breadcrumb">
@@ -81,7 +82,7 @@
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#editModal"> <i class="fas fa-pen"></i> Edit</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#editModal"> <i class="fas fa-edit"></i> Edit</button>
                                     <button type="button" class="btn"><i class="fas fa-trash"></i> Delete</button>
                                 </div>
                             </td>

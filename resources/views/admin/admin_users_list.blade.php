@@ -1,4 +1,4 @@
-@extends('SideNavBar')
+@extends('admin.admin_navigation_bar')
 
 @section('main-content')
 
@@ -13,12 +13,12 @@
           </nav>
       </div>
     <user-table>
-      
+
     </user-table>
 </div>
 
 
-{{-- 
+{{--
   <!-- Modal for editing a user -->
   <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

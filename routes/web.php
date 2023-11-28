@@ -17,26 +17,35 @@ use App\Models\User;
 |
 */
 
+// ADMIN ROUTES
 Route::get('/', function () {
     return view('login');
 });
 
 Route::get('/admin_dashboard', function () {
-    return view('DashboardAdmin');
+    return view('admin.admin_dashboard');
 });
 
 
 Route::get('/violation_records', function () {
-    return view('ViolationRecords');
+    return view('admin.violation_records');
 });
 
-Route::get('/users', function () {
-    return view('users');
+Route::get('/violation_list', function () {
+    return view('admin.violation_list');
 });
 
-Route::get('/review_testimonies', function () {
-    return view('testimonies');
+Route::get('/users_list', function () {
+    return view('admin.admin_users_list');
 });
+
+Route::get('/validation', function () {
+    return view('admin.admin_validation');
+});
+Route::get('/violation1_list', function () {
+    return view('admin.violation_list');
+});
+
 
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
 

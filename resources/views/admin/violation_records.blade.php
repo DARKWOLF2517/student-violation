@@ -1,6 +1,7 @@
-@extends('SideNavBar')
+@extends('admin.admin_navigation_bar')
 
 @section('main-content')
+
 <div class="content">
     <div class="breadcrumbs">
         <nav aria-label="breadcrumb">

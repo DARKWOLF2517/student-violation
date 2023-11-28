@@ -26,6 +26,7 @@
                         <option value="" disabled selected><i class="fas fa-filter"></i> Sort by</option>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
+                        <option value="inactive">Pending</option>
                     </select>
                 </div>
 
@@ -33,23 +34,21 @@
                 <div class="select-dropdown" id= "semester-btn" style="margin-left: 20px; width: 270px;">
                     <!-- Second dropdown -->
                     <select id="sort-select" class="form-control" style="text-align: center; ">
-                        <option value="">Select Semester</option>
+                        <option value="">Select School Year</option>
                         <option value="option1">1st Semester 2023-2024</option>
-                        <option value="option2">2nd Semester 2022-2023</option>
-                        <option value="option3">1st Semester 2022-2023</option>
                     </select>
                 </div>
             </div>
-            <h4> <i class="fas fa-list mt-2"></i>  Users</h4>
+            <h4> <i class="fas fa-list mt-2"></i>  Violation records</h4>
                 <div class="student-buttons d-flex justify-content-end">
                     <div class="btn-group" role="group">
 
                         <button class="btn me-2" data-toggle="modal" data-target="#myModal">
-                            <i class="fas fa-plus"></i> Add new Violation
+                            <i class="fas fa-plus"></i> Add Violation Slip
                         </button>
-                        <button class="btn me-2" id="download" onclick="  downloadTableData()">
+                        {{-- <button class="btn me-2" id="download" onclick="  downloadTableData()">
                             <i class="fas fa-download"></i> Download
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
 
@@ -59,7 +58,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Student Name</th>
-                        <th scope="col">Violations</th>
+                        <th scope="col">Violation</th>
                         <th scope="col">Violation Status</th>
                         <th scope="col">Testimony</th>
                         <th scope="col">Actions</th>
@@ -70,10 +69,12 @@
                             <th scope="row">1</th>
                             <td>Queen Bahay Gwapa</td>
                             <td>Drunkenness</td>
-                            <td>Active</td>
+                            <td style="color: green; font-weight:bold;">Active</td>
+                            {{-- <td style="color: red; font-weight:bold;">Inactive</td>
+                            <td style="color: yellow; font-weight:bold;">Pending</td> --}}
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"> View</i></button>
+                                    {{-- <button type="button" class="btn" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"> View</i></button> --}}
                                     <button type="button" class="btn"  data-toggle="modal" data-target="#addTestimonyModal"><i class="fas fa-plus"></i> Add</button>
                                 </div>
                             </td>
@@ -133,11 +134,9 @@
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h3 class="modal-title">Violation Report Slip</h3>
             </div>
-            <!-- Modal Body -->
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
@@ -151,7 +150,7 @@
                         </select>
                     </div>
 
-                    <div class="flex-container">
+                    {{-- <div class="flex-container">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="dateFiled" class="form-label">Date Filed</label>
@@ -168,7 +167,7 @@
                             <label for="time" class="form-label">Time</label>
                             <input type="time" class="form-control" id="time" name="time" required>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="mb-3">
                         <label for="place" class="form-label">Place</label>
@@ -205,10 +204,10 @@
                         <textarea class="form-control" id="remarks" name="remarks" rows="3"></textarea>
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="reportingAuthority" class="form-label">Name of Reporting Authority</label>
                         <input type="text" class="form-control" id="reportingAuthority" name="reportingAuthority" required>
-                    </div>
+                    </div> --}}
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -220,7 +219,7 @@
         </div>
     </div>
 </div>
-<!-- View testimony Modal -->
+{{-- <!-- View testimony Modal -->
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -228,18 +227,15 @@
                 <h5 class="modal-title" id="viewModalLabel">Student Testimony</h5>
             </div>
             <div class="modal-body">
-    <p><strong>Student Name:</strong> Queen Bahay Gwapa</p>
+    <div class="form-group mb-3">
+        <label for="violationOfficer">Student:</label>
+        <input type="text" class="form-control" id="student_name" placeholder="Taylor Swift" readonly>
+    </div>
 
     <div class="form-group mb-3">
         <label for="violationOfficer">Violation Officer:</label>
-        <input type="text" class="form-control" id="violationOfficer" placeholder="Enter Violation Officer's Name">
+        <input type="text" class="form-control" id="violationOfficer" placeholder="Juan dela Cruz" readonly>
     </div>
-
-    <div class="form-group mb-3">
-        <label for="disciplineOfficer">Discipline Officer:</label>
-        <input type="text" class="form-control" id="disciplineOfficer" placeholder="Enter Discipline Officer's Name">
-    </div>
-
     <div class="form-group mb-3">
         <label for="typeOfViolation">Type of Violation:</label>
         <input type="text" class="form-control" id="typeOfViolation" placeholder="Drunkenness" readonly>
@@ -247,7 +243,7 @@
 
     <div class="form-group">
         <label for="violationDescription">Description:</label>
-        <textarea class="form-control" id="violationDescription" rows="3" placeholder="Enter Description of the Violation"></textarea>
+        <input type="text" class="form-control" id="violationDescription" value="Static Text" readonly>
     </div>
             </div>
             <div class="modal-footer">
@@ -255,7 +251,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Add Testimony Modal -->
 <div class="modal" id="addTestimonyModal">
     <div class="modal-dialog">
@@ -267,17 +263,17 @@
                 <form>
                     <div class="mb-3">
                         <label for="studentName" class="form-label">Name of Student</label>
-                        <input type="text" class="form-control" id="studentName" name="studentName" required>
+                        <input type="text" class="form-control" id="studentName" name="studentName" placeholder="Queen Bahay Gwapa"readonly>
                     </div>
 
                     <div class="mb-3">
                         <label for="violationOfficer" class="form-label">Name of Violation Officer</label>
-                        <input type="text" class="form-control" id="violationOfficer" name="violationOfficer" required>
+                        <input type="text" class="form-control" id="violationOfficer" name="violationOfficer" placeholder="Juan dela Cruz" readonly>
                     </div>
 
                     <div class="mb-3">
                         <label for="violationTypeGiven" class="form-label">Type of Violation Given</label>
-                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven" required>
+                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven" placeholder="Drunkenness" readonly>
                     </div>
 
                     <div class="mb-3">
@@ -285,7 +281,7 @@
                         <textarea class="form-control" id="testimonyDetails" name="testimonyDetails" rows="3" required></textarea>
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="decision" class="form-label">Decision</label>
                         <select class="form-select" id="decision" name="decision" required>
                             <option value="Approved">Testimony of Student Approved</option>
@@ -296,13 +292,14 @@
                     <div class="mb-3">
                         <label for="approvedBy" class="form-label">Approved By</label>
                         <input type="text" class="form-control" id="approvedBy" name="approvedBy" required>
-                    </div>
+                    </div> --}}
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
 
         </div>

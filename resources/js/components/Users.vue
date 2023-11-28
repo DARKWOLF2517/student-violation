@@ -12,8 +12,9 @@
                     <!-- First dropdown -->
                     <select id="sort-select" class="form-control" style="text-align: center;">
                         <option value="" disabled selected><i class="fas fa-filter"></i> Sort by</option>
-                        <option value="fines">Fines</option>
-                        <option value="membership_fee">Membership Fee</option>
+                        <option value="clerk">Clerk</option>
+                        <option value="clerk">Violation Officer</option>
+                        <option value="Admin">Admin</option>
                     </select>
                 </div>
 
@@ -34,7 +35,7 @@
                     <!-- <button class="btn me-2" id="add-student-list-button" onclick="printTableData()">
                         <i class="fas fa-print"></i> Print
                     </button> -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New User</button>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fas fa-plus"></i> Add New User</button>
                 </div>
             </div>
 
@@ -55,10 +56,10 @@
                     <td>{{ users.role }}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Action buttons">
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editUserModal">
-                                Edit
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                <i class="fas fa-pen"></i> Edit
                             </button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn"><i class="fas fa-trash"></i> Delete</button>
                         </div>
                     </td>
                 </tr>
@@ -110,6 +111,7 @@
         </div>
     </div>
 </template>
+
 
 <script>
 
@@ -168,7 +170,7 @@ export default{
         },
         sendData(){
 
-            
+
             axios.post('/create_user', this.formData)
             .then(response => {
                 console.log(response.data);

@@ -71,6 +71,14 @@
                             </button>
                         </li>
                         <li class="mb-1">
+                            <button class="btn btn-toggle align-items-center rounded events-button">
+                                <i class="fas fa-file"></i>
+                                <a href="/review_testimonies">
+                                <span class="link-title">Review</span>
+                                </a>
+                            </button>
+                        </li>
+                        <li class="mb-1">
                             <button class="btn btn-toggle align-items-center studentlist-button">
                                 <i class="fas fa-address-card"></i>
                                 <a href="/users">

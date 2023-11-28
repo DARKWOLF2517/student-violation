@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\student;
+use App\Models\StudentBelongsTo;
 use App\Models\User;
 use App\Models\UserRoles;
 use Illuminate\Http\Request;
@@ -22,6 +24,19 @@ class UserController extends Controller
             'roles' => $roles,
             'user_roles' => $userRoles,
             ]);
+
+    }
+    public function getStudents()
+    {   
+
+        $studentBelongs = StudentBelongsTo::all();
+        $students = student::all();
+
+        return response()->json([
+            'student_belongs' => $studentBelongs, 
+            'students' => $students,
+            ]);
+
 
     }
     public function createUser(Request $request)
@@ -57,4 +72,5 @@ class UserController extends Controller
         return response()->json(['message' => 'User Created Successfully']);
         // return $request['name'];
     }
+
 }

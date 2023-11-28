@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViolationController;
 use App\Models\User;
 
 /*
@@ -43,3 +44,6 @@ Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
 //admin route
 Route::get('/users_get', [UserController::class, 'getUsers']);
 Route::post('/create_user', [UserController::class, 'createUser']);
+Route::get('/get_students', [UserController::class, 'getStudents']);
+Route::post('/create_violation', [ViolationController::class, 'createViolation']);
+Route::get('/getViolations', [ViolationController::class, 'getViolation']);

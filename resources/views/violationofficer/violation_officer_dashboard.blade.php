@@ -1,8 +1,6 @@
-@extends('clerk.clerk_navigation_bar')
+@extends('violationofficer.violation_officer_navigation_bar')
 
 @section('main-content')
-
-
 
 <title>CMU-SVMS</title>
 

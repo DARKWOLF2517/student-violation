@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\student;
+use App\Models\Testimony;
 use App\Models\ViolationRecord;
 use Illuminate\Http\Request;
 
@@ -36,8 +38,38 @@ class ViolationController extends Controller
     public function getViolation()
     {   
 
-        $users = ViolationRecord::all();
-        return response()->json($users);
+        $violation = ViolationRecord::all();
+        $students = student::all();
+        
 
+
+        return response()->json([
+            'violations' => $violation, 
+            'students' => $students,
+            ]);
+
+            
     }
+    public function createTestimony(Request $request)
+    {   
+        // Validate the form data
+        $validatedData = $this->validate($request,[
+            'violation_list_id' => 'required',
+            'witness' => 'required',
+            'testimonyDetails' => 'required',
+        ]);
+
+        // Create a new Users instance
+        $violations = new Testimony([
+            'violation_list_id' => $validatedData['violation_list_id'],
+            'name' => $validatedData['witness'],
+            'testimony' => $validatedData['testimonyDetails'],
+        ]);
+        $violations->save();
+
+        // Redirect or return a response
+        return response()->json(['message' => 'Added Successfully']);
+        // return $request;
+    }
+
 }

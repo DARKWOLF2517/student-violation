@@ -56,3 +56,4 @@ Route::post('/create_user', [UserController::class, 'createUser']);
 Route::get('/get_students', [UserController::class, 'getStudents']);
 Route::post('/create_violation', [ViolationController::class, 'createViolation']);
 Route::get('/getViolations', [ViolationController::class, 'getViolation']);
+Route::post('/create_testimony', [ViolationController::class, 'createTestimony']);

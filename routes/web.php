@@ -46,6 +46,45 @@ Route::get('/violation1_list', function () {
     return view('admin.violation_list');
 });
 
+// CLERK ROUTES
+Route::get('/', function () {
+    return view('login');
+});
+
+Route::get('/clerk_dashboard', function () {
+    return view('.clerk_dashboard');
+});
+
+
+Route::get('/clerk_violation_records', function () {
+    return view('clerk.violation_records');
+});
+
+Route::get('/clerk_violation_list', function () {
+    return view('clerk.violation_list');
+});
+
+Route::get('/clerk_review', function () {
+    return view('admin.clerk_review_testimonies');
+});
+Route::get('/violation1_list', function () {
+    return view('clerk.clerk_violation_list');
+});
+
+//Violation Officer ROUTES
+Route::get('/', function () {
+    return view('login');
+});
+
+Route::get('/violation_officer_dashboard', function () {
+    return view('violation_officer.violation_officer_dashboard');
+});
+
+
+Route::get('/violation_records', function () {
+    return view('violation_officer.violation_records');
+});
+
 
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
 

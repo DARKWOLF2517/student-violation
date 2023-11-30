@@ -10,11 +10,6 @@
 
     <!-- Add Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-
-    <!-- FullCalendar CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css" rel="stylesheet">
-
-
     {{-- CUSTOM STYLE SHEETS FOUND IN PUBLIC DIRECTORY --}}
     <link rel="stylesheet" href="navbars.css">
     <link rel="stylesheet" href="stylesheet.css">
@@ -88,7 +83,7 @@
                     </li>
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
-                            <i class="fas fa-book-reader"></i>
+                            <i class="fas fa-book-check"></i>
                             <a href="/validation">
                             <span class="link-title">Validation</span>
                             </a>

@@ -3,7 +3,7 @@ import { createApp } from 'vue';
 
 import Login from './components/Login.vue';
 import UsersTable from './components/Users.vue';
-import ViolationList from './components/ViolationList.vue';
+import ViolationList from './components/ViolationRecord.vue';
 
 const app = createApp({});
 

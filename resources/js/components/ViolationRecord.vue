@@ -56,15 +56,14 @@
                     <tbody>
                         <tr v-for="violations in this.violation_list" :id="violations.violation_list_id">
                             <th scope="row">{{ violations.student_id }}</th>
-                            <td>{{ violations.student_id }}</td>
-                            <td>Drunkenness</td>
-                            <td style="color: green; font-weight:bold;">Active</td>
-                            <!-- {{-- <td style="color: red; font-weight:bold;">Inactive</td>
-                            <td style="color: yellow; font-weight:bold;">Pending</td> --}} -->
+                            <td>{{ violations.student_name }}</td>
+                            <td>{{ violations.types_of_violation }}</td>
+                            <td v-if="violations.status == 1" style="color: green; font-weight:bold;">Active</td>
+                            <td v-else-if="violations.status == 0" style="color: red; font-weight:bold;">Inactive</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
                                     <!-- {{-- <button type="button" class="btn" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"> View</i></button> --}} -->
-                                    <button type="button" class="btn"  data-toggle="modal" data-target="#addTestimonyModal"><i class="fas fa-plus"></i> Add</button>
+                                    <button type="button" class="btn"  @click="this.id = violations.violation_list_id, this.clickAddTestimonies()"  data-toggle="modal" data-target="#addTestimonyModal"><i class="fas fa-plus"></i> Add</button>
                                 </div>
                             </td>
 
@@ -77,44 +76,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Student Information</h5>
-                </div>
-                <div class="modal-body">
-                    <!-- Use dropdowns instead of input fields -->
-                    <p>Student Name: Queen Bahay Gwapa</p>
-                    <p>Violation:
-                        <select class="form-control">
-                            <option value="NonWearingID">Non-wearing of School ID</option>
-                            <option value="Littering">Littering</option>
-                            <option value="GoodGrooming">Good Grooming</option>
-                            <option value="Vandalism">Vandalism</option>
-                            <option value="Smoking">Smoking</option>
-                            <option value="OverSpeeding">Over Speeding</option>
-                            <option value="Drunkenness">Drunkenness</option>
-                            <option value="Contraband">Possession of Contraband</option>
-                            <option value="Others">Others (Please specify)</option>
-                        </select>
-                    </p>
-                    <p>Status:
-                        <select class="form-control">
-                            <option value="Active" selected>Active</option>
-                            <option value="Inactive">Inactive</option>
-                            <!-- Add more options as needed -->
-                        </select>
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
             </div>
         </div>
     </div>
@@ -163,33 +124,42 @@
                 <h4 class="modal-title">Add Testimony</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form @submit.prevent="this.submitTestimonies()">
                     <div class="mb-3">
                         <label for="studentName" class="form-label">Name of Student</label>
-                        <input type="text" class="form-control" id="studentName" name="studentName" placeholder="Queen Bahay Gwapa" readonly>
+                        <input type="text" class="form-control" id="studentName" name="studentName"  readonly v-model="addTestimonyView.student_name">
                     </div>
 
                     <div class="mb-3">
                         <label for="violationOfficer" class="form-label">Name of Violation Officer</label>
-                        <input type="text" class="form-control" id="violationOfficer" name="violationOfficer" placeholder="Juan dela Cruz" readonly>
+                        <input type="text" class="form-control" id="violationOfficer" name="violationOfficer"  readonly v-model="addTestimonyView.violation_officer">
                     </div>
 
                     <div class="mb-3">
                         <label for="violationTypeGiven" class="form-label">Type of Violation Given</label>
-                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven" placeholder="Drunkenness" readonly>
+                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven"  readonly v-model="addTestimonyView.types_of_violation">
+                    </div>
+                    <div class="mb-3">
+                        <label for="remarks" class="form-label">Remarks</label>
+                        <textarea  class="form-control" id="remarks" name="remarks" rows="3"  readonly v-model="addTestimonyView.remarks"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="violationTypeGiven" class="form-label">Name of Witness</label>
+                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven" required v-model="addTestimonyView.witness">
                     </div>
 
                     <div class="mb-3">
                         <label for="testimonyDetails" class="form-label">Testimony Details</label>
-                        <textarea class="form-control" id="testimonyDetails" name="testimonyDetails" rows="3" required></textarea>
+                        <textarea class="form-control" id="testimonyDetails" name="testimonyDetails" rows="3" required v-model="addTestimonyView.testimonyDetails"></textarea>
                     </div>
-                </form>
-            </div>
+
+            
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-
+            </form>
+        </div>
         </div>
     </div>
 </div>
@@ -203,6 +173,7 @@ export default{
     props:['user_id'],
     data(){
         return{
+            id: 0,
             students_list:[],
             violation:{
                 id: '',
@@ -212,6 +183,17 @@ export default{
 
             },
             violation_list:[],
+            addTestimonyView :{
+                violation_list_id: 'sdf',
+                types_of_violation: '',
+                student_id:'',
+                student_name: '',
+                status: '',
+                violation_officer: '',
+                remarks: '',
+                witness:'',
+                testimonyDetails: '',
+            },
         }
     },
     mounted(){
@@ -220,6 +202,51 @@ export default{
         this.displayViolation();
     },
     methods:{
+        submitTestimonies(){
+            axios.post('/create_testimony', this.addTestimonyView)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+                alert('sadfd')
+            });
+        },
+        clickAddTestimonies(){
+            this.addTestimonyView = [];
+            const temp = [];
+            this.violation_list.forEach(violate=>{
+                if (violate.violation_list_id === this.id){
+                    temp.push({
+                                violation_list_id : violate.violation_list_id,
+                                types_of_violation: violate.types_of_violation,
+                                student_id: violate.student_id,
+                                student_name: violate.student_name,
+                                status: violate.status,
+                                violation_officer: violate.violation_officer,
+                                remarks: violate.remarks,
+
+                    })
+                }
+            });
+            temp.forEach(element => {
+                this.addTestimonyView = {
+                violation_list_id: element.violation_list_id,
+                types_of_violation: element.types_of_violation,
+                student_id:element.student_id,
+                student_name: element.student_name,
+                status: element.status,
+                violation_officer: element.violation_officer,
+                remarks: element.remarks,
+                witness:'',
+                testimonyDetails: '',
+
+            }
+                
+            });
+            console.log(this.addTestimonyView)
+            
+        },
         clearViolation(){
             this.violation = {
                 id: '',
@@ -233,6 +260,7 @@ export default{
             axios.post('/create_violation', this.violation)
             .then(response => {
                 console.log(response.data);
+                this.displayViolation();
             })
             .catch(error => {
                 console.log(error)
@@ -245,7 +273,6 @@ export default{
             .then(response => {
 
                 const students = response.data.student_belongs;
-                
                 this.students_list = students.map(student => student.student_id);
             
             })
@@ -289,8 +316,26 @@ export default{
         displayViolation(){
             axios.get('/getViolations')
             .then(response => {
-                console.log(response.data)    
-                this.violation_list = response.data;        
+                console.log(response.data)
+                this.violation_list = [];
+                const students = response.data.students;
+                const violation = response.data.violations;
+                violation.forEach(violate=>{
+                    students.forEach(stud => {
+                        if (stud.student_id === violate.student_id){
+                            this.violation_list.push({
+                                violation_list_id : violate.violation_list_id,
+                                types_of_violation: violate.types_of_violation,
+                                student_id: violate.student_id,
+                                student_name: stud.name,
+                                status: violate.status,
+                                violation_officer: violate.violation_officer_id,
+                                remarks: violate.remarks,
+                            })
+                        }
+                    });
+                })
+                console.log(this.violation_list);        
             })
             .catch(error => {
                 console.log(error)

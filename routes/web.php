@@ -51,7 +51,7 @@ Route::get('/violation1_list', function () {
 
 
 Route::get('/clerk_dashboard', function () {
-    return view('.clerk_dashboard');
+    return view('clerk.clerk_dashboard');
 });
 
 
@@ -73,14 +73,9 @@ Route::get('/violation1_list', function () {
 //Violation Officer ROUTES
 
 
-// Route::get('/violation_officer_dashboard', function () {
-//     return view('violation_officer.violation_officer_dashboard');
-// });
-
-
-// Route::get('/violation_records', function () {
-//     return view('violation_officer.violation_records');
-// });
+Route::get('/violation_records', function () {
+    return view('violation_officer.violation_officer_violation_records');
+});
 
 
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);

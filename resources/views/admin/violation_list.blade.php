@@ -62,10 +62,11 @@
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>Queen Bahay Gwapa</td>
+                            <td>Drunkenness</td>
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
+                                    <button type="button" class="btn"  data-toggle="modal" data-target="#myModal"><i class="fas fa-eye"></i> View</button>
                                     <button type="button" class="btn" data-toggle="modal" data-target="#editModal"> <i class="fas fa-edit"></i> Edit</button>
                                     <button type="button" class="btn"><i class="fas fa-trash"></i> Delete</button>
                                 </div>
@@ -107,7 +108,34 @@
                     </div>
                 </div>
             </div>
-
+<!-- View Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View Details</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-3">
+                    <label for="violationName"> <b>Violation Name:</b></label>
+                    <input type="text" class="form-control" id="violationName" value="Drunkenness" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="violationDescription"> <b> Violation Description: </b></label>
+                    <p class="desciption">
+                        Drunkenness - (page 68 #4)
+                        1st offense 2-5 days suspension
+                        2nd offense 3-7 days suspension
+                        3rd offense 8-30 days suspension
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Add new Violation Modal -->
 <div class="modal" id="addViolationModal">
     <div class="modal-dialog">

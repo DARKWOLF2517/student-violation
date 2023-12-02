@@ -60,7 +60,7 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded dashboard-button">
                             <i class="fas fa-tachometer-alt"></i>
-                            <a href="/clerk_dashboard">
+                            <a href="/violation_officer_dashboard">
                             <span class="link-title">Dashboard</span>
                             </a>
                         </button>
@@ -68,7 +68,7 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-list-alt"></i>
-                            <a href="/clerk_violation_records">
+                            <a href="/violation_officer_violation_records">
                             <span class="link-title">Violation Records</span>
                             </a>
                         </button>

@@ -68,7 +68,7 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-list-alt"></i>
-                            <a href="/violation_records">
+                            <a href="/admin_violation_records">
                             <span class="link-title">Violation Records</span>
                             </a>
                         </button>
@@ -76,15 +76,15 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-book-reader"></i>
-                            <a href="/violation_list">
+                            <a href="/admin_violation_list">
                             <span class="link-title">Violation List</span>
                             </a>
                         </button>
                     </li>
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
-                            <i class="fas fa-book-check"></i>
-                            <a href="/validation">
+                            <i class="fas fa-check"></i>
+                            <a href="/admin_validation">
                             <span class="link-title">Validation</span>
                             </a>
                         </button>
@@ -92,7 +92,7 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center studentlist-button">
                             <i class="fas fa-address-card"></i>
-                            <a href="/users_list">
+                            <a href="/admin_users_list">
                             <span class="link-title">Users</span>
                             </a>
                         </button>

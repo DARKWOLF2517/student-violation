@@ -18,6 +18,7 @@ use App\Models\User;
 */
 
 // ADMIN ROUTES
+
 Route::get('/', function () {
     return view('login');
 });
@@ -47,9 +48,7 @@ Route::get('/violation1_list', function () {
 });
 
 // CLERK ROUTES
-Route::get('/', function () {
-    return view('login');
-});
+
 
 Route::get('/clerk_dashboard', function () {
     return view('.clerk_dashboard');
@@ -57,38 +56,34 @@ Route::get('/clerk_dashboard', function () {
 
 
 Route::get('/clerk_violation_records', function () {
-    return view('clerk.violation_records');
+    return view('clerk.clerk_violation_records');
 });
 
 Route::get('/clerk_violation_list', function () {
-    return view('clerk.violation_list');
+    return view('clerk.clerk_violation_list');
 });
 
 Route::get('/clerk_review', function () {
-    return view('admin.clerk_review_testimonies');
+    return view('clerk.clerk_review_testimonies');
 });
 Route::get('/violation1_list', function () {
     return view('clerk.clerk_violation_list');
 });
 
 //Violation Officer ROUTES
-Route::get('/', function () {
-    return view('login');
-});
-
-Route::get('/violation_officer_dashboard', function () {
-    return view('violation_officer.violation_officer_dashboard');
-});
 
 
-Route::get('/violation_records', function () {
-    return view('violation_officer.violation_records');
-});
+// Route::get('/violation_officer_dashboard', function () {
+//     return view('violation_officer.violation_officer_dashboard');
+// });
+
+
+// Route::get('/violation_records', function () {
+//     return view('violation_officer.violation_records');
+// });
 
 
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
-
-
 //admin route
 Route::get('/users_get', [UserController::class, 'getUsers']);
 Route::post('/create_user', [UserController::class, 'createUser']);
@@ -96,3 +91,4 @@ Route::get('/get_students', [UserController::class, 'getStudents']);
 Route::post('/create_violation', [ViolationController::class, 'createViolation']);
 Route::get('/getViolations', [ViolationController::class, 'getViolation']);
 Route::post('/create_testimony', [ViolationController::class, 'createTestimony']);
+Route::get('/getTestimony', [ViolationController::class, 'getTestimony']);

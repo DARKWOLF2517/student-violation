@@ -72,4 +72,10 @@ class ViolationController extends Controller
         // return $request;
     }
 
+    public function getTestimony()
+    {   
+        $testimony = Testimony::all();
+        return  $testimony;
+    }
+
 }

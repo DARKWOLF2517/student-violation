@@ -45,7 +45,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID Number</th>
                         <th scope="col">Student Name</th>
                         <th scope="col">Violation</th>
                         <th scope="col">Violation Status</th>

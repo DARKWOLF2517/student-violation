@@ -11,10 +11,11 @@
     <!-- Add Font Awesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     {{-- CUSTOM STYLE SHEETS FOUND IN PUBLIC DIRECTORY --}}
-    <link rel="stylesheet" href="navbars.css">
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="{{ asset('navbars.css') }}">
+    <link rel="stylesheet" href="{{ asset('stylesheet.css') }}">
+    
     @yield('custom-style')
-    <title>Student Organization Dashboard</title>
+    <title>Student Violation Monitoring System</title>
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     @vite('resources/js/app.js', 'build')
 </head>
@@ -108,7 +109,7 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
     <!-- FullCalendar JS -->
     {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
     <script>
         document.onreadystatechange = () => {
             if (document.readyState === "complete") {

@@ -78,4 +78,10 @@ class ViolationController extends Controller
         return  $testimony;
     }
 
+    public function deleteViolation(ViolationRecord $violation)
+    {
+        $violation->delete();
+        return response()->json(['message' => 'Deleted successfully']);
+    }
+
 }

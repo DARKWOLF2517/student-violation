@@ -70,7 +70,7 @@
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
                                     <button type="button" class="btn" data-toggle="modal" data-target="#editModal"> <i class="fas fa-pen"></i> Edit</button>
-                                    <button type="button" class="btn"><i class="fas fa-trash"></i> Delete</button>
+                                    <button type="button" class="btn" @click="this.id = violations.violation_list_id " data-toggle="modal" data-target="#deleteConfirmation" ><i class="fas fa-trash"></i> Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -81,14 +81,14 @@
     </div>
 
 <!-- Add new violation slip Modal -->
-<div class="modal" id="myModal">
+<div class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Violation Report Slip</h3>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="this.submitViolation">
+                <form @submit="this.submit">
                     <div class="mb-3">
                         <label for="studentName" class="form-label">ID number of Student</label>
                         <input type="number" class="form-control" id="studentId" name="studentId" @click="this.idNumberFilter()" required v-model="this.violation.id">
@@ -107,7 +107,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" >Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -117,8 +117,8 @@
 </div>
 
 <!-- Add Testimony Modal -->
-<div class="modal" id="addTestimonyModal">
-    <div class="modal-dialog">
+<div class="modal fade" id="addTestimonyModal"  tabindex="-1" aria-labelledby="addTestimonyLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Add Testimony</h4>
@@ -156,13 +156,33 @@
             
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" >Submit</button>
             </div>
             </form>
         </div>
         </div>
     </div>
 </div>
+
+
+    <!-- Delete confirmation -->
+    <div class="modal fade " id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><b>Are you sure you want to delete this Violation?</b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" @click="deleteViolation()" data-dismiss="modal">Delete</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
 
 
 </template>
@@ -173,6 +193,7 @@ export default{
     props:['user_id'],
     data(){
         return{
+            submit: this.submitViolation,
             id: 0,
             students_list:[],
             violation:{
@@ -202,10 +223,26 @@ export default{
         this.displayViolation();
     },
     methods:{
+        deleteViolation(){
+            console.log(this.id);
+            axios.delete(`/delete_violation/${this.id}`)
+                    .then(response => {
+                        console.log(response.data);
+                        this.displayViolation();
+                    })
+                    .catch(error => {
+                        if (error.response && error.response.status === 422) {
+                            this.errors = error.response.data.errors;
+                        }
+                        alert(error)
+
+            });
+        },
         submitTestimonies(){
             axios.post('/create_testimony', this.addTestimonyView)
             .then(response => {
                 console.log(response.data);
+
             })
             .catch(error => {
                 console.log(error)

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="navbars.css">
     <link rel="stylesheet" href="stylesheet.css">
     @yield('custom-style')
-    <title>Student Organization Dashboard</title>
+    <title>Student Violation Monitoring System</title>
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     @vite('resources/js/app.js', 'build')
 </head>

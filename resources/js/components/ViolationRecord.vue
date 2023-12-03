@@ -32,7 +32,7 @@
                 <div class="student-buttons d-flex justify-content-end">
                     <div class="btn-group" role="group">
 
-                        <button class="btn me-2" data-toggle="modal" data-target="#myModal" @click=" this.clearViolation()">
+                        <button @click=" this.clearViolation()" class="btn me-2" data-toggle="modal" data-target="#myModal" >
                             <i class="fas fa-plus"></i> Add Violation Slip
                         </button>
                         <!-- {{-- <button class="btn me-2" id="download" onclick="  downloadTableData()">
@@ -58,8 +58,9 @@
                             <th scope="row">{{ violations.student_id }}</th>
                             <td>{{ violations.student_name }}</td>
                             <td>{{ violations.types_of_violation }}</td>
-                            <td v-if="violations.status == 1" style="color: green; font-weight:bold;">Active</td>
-                            <td v-else-if="violations.status == 0" style="color: red; font-weight:bold;">Inactive</td>
+                            <td v-if="violations.status == 1" style="color: green; font-weight:bold;">Approved</td>
+                            <td v-else-if="violations.status == 0" style="color: rgb(174, 174, 10); font-weight:bold;">Pending</td>
+                            <td v-else-if="violations.status == 2" style="color: red; font-weight:bold;">Declined</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
                                     <!-- {{-- <button type="button" class="btn" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"> View</i></button> --}} -->
@@ -69,7 +70,7 @@
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#editModal"> <i class="fas fa-pen"></i> Edit</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal" @click="this.submit = this.updateViolation, this.id = violations.violation_list_id,this.fetchUpdate()"> <i class="fas fa-pen"></i> Edit</button>
                                     <button type="button" class="btn" @click="this.id = violations.violation_list_id " data-toggle="modal" data-target="#deleteConfirmation" ><i class="fas fa-trash"></i> Delete</button>
                                 </div>
                             </td>
@@ -85,13 +86,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Violation Report Slip</h3>
+                <h3 class="modal-title" v-if="this.submit === this.submitViolation">Add Violation Report Slip</h3>
+                <h3 class="modal-title" v-else-if="this.submit === this.updateViolation">Edit Violation Report Slip</h3>
             </div>
             <div class="modal-body">
                 <form @submit="this.submit">
                     <div class="mb-3">
                         <label for="studentName" class="form-label">ID number of Student</label>
-                        <input type="number" class="form-control" id="studentId" name="studentId" @click="this.idNumberFilter()" required v-model="this.violation.id">
+                        <input type="number" class="form-control" id="studentId" name="studentId" @click="this.idNumberFilter()" required v-model="this.violation.id" v-if="this.submit === this.submitViolation">
+                        <input type="number" class="form-control" id="studentId" name="studentId" readonly @click="this.idNumberFilter()" required v-model="this.violation.id" v-else-if="this.submit === this.updateViolation">
                         <div id="suggestionList"></div>    
                     </div>
                     <div class="mb-3">
@@ -223,6 +226,34 @@ export default{
         this.displayViolation();
     },
     methods:{
+        fetchUpdate(){
+            axios.get(`/fetch_update_violation_record/${this.id}`)
+            .then(response => {
+
+                response.data.forEach(v =>{
+                    this.violation = {
+                        id: v.student_id,
+                        type_of_violation: v.types_of_violation,
+                        remarks: v.remarks,
+                    }
+                })
+                console.log(this.violation)
+            
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        },
+
+        updateViolation(){
+            axios.put(`/updateViolation/${this.id}`, this.violation)
+                .then(response => {
+                })
+                .catch(error => {
+                    // console.error('Error updating user:', error);
+                    alert('Error updating user:', error)
+                });
+        },
         deleteViolation(){
             console.log(this.id);
             axios.delete(`/delete_violation/${this.id}`)
@@ -292,6 +323,8 @@ export default{
                 officer: this.user_id,
 
             }
+            this.submit = this.submitViolation;
+        
         },
         submitViolation(){
             axios.post('/create_violation', this.violation)

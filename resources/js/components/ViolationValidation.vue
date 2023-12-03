@@ -56,8 +56,9 @@
                             <th scope="row">{{ violation.student_id }}</th>
                             <td>{{ violation.student_name }}</td>
                             <td>{{ violation.types_of_violation }}</td>
-                            <td v-if="violation.status == 1" style="color: green; font-weight:bold;">Active</td>
-                            <td v-else-if="violation.status == 0" style="color: red; font-weight:bold;">Inactive</td>
+                            <td v-if="violation.status == 1" style="color: green; font-weight:bold;">Approved</td>
+                            <td v-else-if="violation.status == 0" style="color: rgb(174, 174, 10); font-weight:bold;">Pending</td>
+                            <td v-else-if="violation.status == 2" style="color: red; font-weight:bold;">Declined</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
                                     <!-- {{-- <button type="button" class="btn" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"> View</i></button> --}} -->
@@ -67,8 +68,8 @@
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#editModal"> <i class="fas fa-check"></i> Approve</button>
-                                    <button type="button" class="btn"><i class="fas fa-times"></i> Disapprove</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#" @click="this.decision = 1,this.id = violation.violation_list_id, this.validate() "> <i class="fas fa-check"></i> Approve</button>
+                                    <button type="button" class="btn" @click="this.decision = 0,this.id = violation.violation_list_id, this.validate()"><i class="fas fa-times"></i> Disapprove</button>
                                 </div>
                             </td>
                         </tr>
@@ -118,6 +119,8 @@ export default{
     props:[],
     data(){
         return{
+            id: '',
+            decision: 0,
             violation_list: [],
             testimony_list:[],
             testimony_list_temporary:[],
@@ -130,6 +133,17 @@ export default{
         this.showTestimony();
     },
     methods:{
+        validate(){
+
+            axios.put(`/updateViolationStatus/${this.id}/${this.decision}`)
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    // console.error('Error updating user:', error);
+                    alert('Error updating user:', error)
+                });
+        },
         showData(){
             axios.get('/getViolations')
             .then(response => {

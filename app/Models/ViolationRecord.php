@@ -20,4 +20,11 @@ class ViolationRecord extends Model
         'remarks',
         'status'
     ];
+
+
+    public function users()
+    {
+        return $this->hasOne(User::class,'student_id','id');
+    }
 }
+

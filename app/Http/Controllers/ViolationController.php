@@ -6,6 +6,8 @@ use App\Models\student;
 use App\Models\Testimony;
 use App\Models\ViolationRecord;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Psy\Readline\Hoa\Console;
 
 class ViolationController extends Controller
 {
@@ -26,7 +28,7 @@ class ViolationController extends Controller
             'violation_officer_id' => $validatedData['officer'],
             'types_of_violation' => $validatedData['type_of_violation'],
             'remarks'  => $validatedData['remarks'],
-            'status' => $validatedData['status']?? 1,
+            'status' => $validatedData['status']?? 0,
         ]);
         $violations->save();
 
@@ -82,6 +84,52 @@ class ViolationController extends Controller
     {
         $violation->delete();
         return response()->json(['message' => 'Deleted successfully']);
+    }
+
+    public function getUpdateViolationRecord($id)
+    {   
+        $violation_record = ViolationRecord::where('violation_list_id', $id)->get();
+        return $violation_record;
+    }
+
+    public function updateViolation(Request $request, ViolationRecord $id)
+    {   
+
+        $request -> validate([
+            'type_of_violation' => 'required',
+            'remarks' => 'required',
+        ]);
+
+        $id->update($request->all());
+        
+        return response()->json(['message' => 'Violation Updated Successfully']);
+        // return $request;
+    }
+
+    public function updateViolationStatus($id, $decision)
+    {
+
+        
+        $violation = ViolationRecord::find($id);
+                
+        try {
+        
+        $violation->update(['status' => $decision]);
+        
+        DB::commit();
+        
+        return response()->json([
+            'message' => 'Updated successfully',
+            'violation' => $violation
+        ]);
+
+        } catch (\Exception $e) {
+
+        DB::rollBack();
+        
+        return response()->json(['error' => $e->getMessage()]); 
+        }
+        // return $decision;
     }
 
 }

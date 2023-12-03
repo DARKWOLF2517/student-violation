@@ -89,3 +89,6 @@ Route::post('/create_testimony', [ViolationController::class, 'createTestimony']
 Route::get('/getTestimony', [ViolationController::class, 'getTestimony']);
 
 Route::delete('/delete_violation/{violation}', [ViolationController::class, 'deleteViolation']);
+Route::get('/fetch_update_violation_record/{id}', [ViolationController::class, 'getUpdateViolationRecord']);
+Route::put('/updateViolation/{id}', [ViolationController::class, 'updateViolation']);
+Route::put('/updateViolationStatus/{id}/{decision}', [ViolationController::class, 'updateViolationStatus']);

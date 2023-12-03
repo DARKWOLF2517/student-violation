@@ -78,36 +78,37 @@
         </div>
     </div>
 
-    <!-- View testimony Modal -->
+<!-- View testimony Modal -->
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="viewModalLabel">Testimony</h5>
             </div>
-            <table class="table table-hover">
+            <div class="modal-body"> <!-- Added a modal-body for better structure -->
+                <table class="table table-hover">
                     <thead>
-                    <tr>
-
-                        <th scope="col">Witness Name</th>
-                        <th scope="col">Testimony</th>
-
-                    </tr>
+                        <tr>
+                            <th scope="col">Witness Name</th>
+                            <th scope="col">Testimony</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="testimony in this.testimony_list_temporary"  :id="testimony.violation_list_id">
+                        <!-- Using v-for to loop through testimonies -->
+                        <tr v-for="testimony in this.testimony_list_temporary" :key="testimony.violation_list_id">
                             <td>{{ testimony.name }}</td>
                             <td>{{ testimony.testimony }}</td>
-            
                         </tr>
                     </tbody>
                 </table>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
+
 
 </template>
 
@@ -151,7 +152,7 @@ export default{
                         }
                     });
                 })
-                console.log('asdfads');        
+                console.log('asdfads');
             })
             .catch(error => {
                 console.log(error)
@@ -159,9 +160,9 @@ export default{
         },
         showTestimony(){
             axios.get('/getTestimony')
-            .then(response => { 
-                this.testimony_list = response.data;  
-                console.log(this.testimony_list)     
+            .then(response => {
+                this.testimony_list = response.data;
+                console.log(this.testimony_list)
             })
             .catch(error => {
                 console.log(error)

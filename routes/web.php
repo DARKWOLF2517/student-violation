@@ -28,19 +28,19 @@ Route::get('/admin_dashboard', function () {
 });
 
 
-Route::get('/violation_records', function () {
-    return view('admin.violation_records');
+Route::get('/admin_violation_records', function () {
+    return view('admin.admin_violation_records');
 });
 
-Route::get('/violation_list', function () {
-    return view('admin.violation_list');
+Route::get('/admin_violation_list', function () {
+    return view('admin.admin_violation_list');
 });
 
-Route::get('/users_list', function () {
+Route::get('/admin_users_list', function () {
     return view('admin.admin_users_list');
 });
 
-Route::get('/validation', function () {
+Route::get('/admin_validation', function () {
     return view('admin.admin_validation');
 });
 Route::get('/violation1_list', function () {
@@ -73,9 +73,9 @@ Route::get('/violation1_list', function () {
 //Violation Officer ROUTES
 
 
-// Route::get('/violation_records', function () {
-//     return view('violation_officer.violation_officer_violation_records');
-// });
+Route::get('/violation_officer_violation_records', function () {
+    return view('violation_officer.violation_officer_violation_records');
+});
 
 
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);

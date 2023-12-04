@@ -68,7 +68,7 @@
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#" @click="this.decision = 1,this.id = violation.violation_list_id, this.validate() "> <i class="fas fa-check"></i> Approve</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#addSanctionModal" > <i class="fas fa-check"></i> Approve</button>
                                     <button type="button" class="btn" @click="this.decision = 0,this.id = violation.violation_list_id, this.validate()"><i class="fas fa-times"></i> Disapprove</button>
                                 </div>
                             </td>
@@ -78,6 +78,53 @@
             </div>
         </div>
     </div>
+
+
+<!-- APPROVE/Add sanction  Modal -->
+<div class="modal fade" id="addSanctionModal"  tabindex="-1" aria-labelledby="addSanctionLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Select Sanction</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Name of Student</label>
+                        <input type="text" class="form-control" id="studentName" name="studentName"  readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="violationOfficer" class="form-label">Name of Violation Officer</label>
+                        <input type="text" class="form-control" id="violationOfficer" name="violationOfficer"  readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="violationTypeGiven" class="form-label">Type of Violation Given</label>
+                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven"  readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="remarks" class="form-label">Remarks</label>
+                        <textarea  class="form-control" id="remarks" name="remarks" rows="3"  readonly></textarea>
+                    </div>
+                    <div class="mb-3">
+                    <label for="sanctionTypeGiven" class="form-label">Select Sanction</label>
+                    <select class="form-select" id="sanctionTypeGiven" name="sanctionTypeGiven">
+                        <option value="1">1st Offense</option>
+                        <option value="2">2nd Offense</option>
+                        <option value="3">3rd Offense</option>
+                    </select>
+                </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" >Approve</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
 
 <!-- View testimony Modal -->
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">

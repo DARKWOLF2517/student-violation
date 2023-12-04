@@ -32,8 +32,8 @@ Route::get('/admin_violation_records', function () {
     return view('admin.admin_violation_records');
 });
 
-Route::get('/admin_violation_list', function () {
-    return view('admin.admin_violation_list');
+Route::get('/admin_sanction_list', function () {
+    return view('admin.admin_sanction_list');
 });
 
 Route::get('/admin_users_list', function () {
@@ -59,18 +59,20 @@ Route::get('/clerk_violation_records', function () {
     return view('clerk.clerk_violation_records');
 });
 
-Route::get('/clerk_violation_list', function () {
-    return view('clerk.clerk_violation_list');
+Route::get('/clerk_sanction_list', function () {
+    return view('clerk.clerk_sanction_list');
 });
 
 Route::get('/clerk_review', function () {
     return view('clerk.clerk_review_testimonies');
 });
-Route::get('/violation1_list', function () {
-    return view('clerk.clerk_violation_list');
-});
+
 
 //Violation Officer ROUTES
+
+Route::get('/violation_officer_dashboard', function () {
+    return view('violation_officer.violation_officer_dashboard');
+});
 
 
 Route::get('/violation_officer_violation_records', function () {

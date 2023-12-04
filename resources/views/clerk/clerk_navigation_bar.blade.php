@@ -80,8 +80,8 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-book-reader"></i>
-                            <a href="/clerk_violation_list">
-                            <span class="link-title">Violation List</span>
+                            <a href="/clerk_sanction_list">
+                            <span class="link-title">Sanction List</span>
                             </a>
                         </button>
                     </li>

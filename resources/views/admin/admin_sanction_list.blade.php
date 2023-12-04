@@ -43,7 +43,9 @@
             <h4> <i class="fas fa-list mt-2"></i>  Violation records</h4>
                 <div class="student-buttons d-flex justify-content-end">
                     <div class="btn-group" role="group">
-
+                        <button class="btn me-2" data-toggle="modal" data-target="#addSanctionModal">
+                            <i class="fas fa-plus"></i> Add New Sanction
+                        </button>
                         <button class="btn me-2" data-toggle="modal" data-target="#addViolationModal">
                             <i class="fas fa-plus"></i> Add New Violation
                         </button>
@@ -148,6 +150,45 @@
                     <div class="mb-3">
                         <label for="studentName" class="form-label">Name of Violation</label>
                         <input type="text" class="form-control" id="violationName" name="violationName" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="testimonyDetails" class="form-label">Violation Description</label>
+                        <textarea class="form-control" id="violationDescription" name="violationDescription" rows="3" required></textarea>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Add new Sanction Modal -->
+<div class="modal" id="addSanctionModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Sanction</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="violationName" class="form-label">Name of Violation</label>
+                        <select class="form-select" id="violationName" name="violationName" required>
+                            <option value="Drunkenness">Drunkenness</option>
+                            <option value="Good Grooming">Good Grooming</option>
+                            <option value="Over-speeding">Over-speeding</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Name of Sanction</label>
+                        <input type="text" class="form-control" id="violationName" name="sanctionName" required>
                     </div>
 
                     <div class="mb-3">

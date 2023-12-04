@@ -14,7 +14,7 @@
     {{-- CUSTOM STYLE SHEETS FOUND IN PUBLIC DIRECTORY --}}
     <link rel="stylesheet" href="{{ asset('navbars.css') }}">
     <link rel="stylesheet" href="{{ asset('stylesheet.css') }}">
-    
+
     @yield('custom-style')
     <title>Student Violation Monitoring System</title>
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
@@ -78,8 +78,8 @@
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-book-reader"></i>
-                            <a href="/admin_violation_list">
-                            <span class="link-title">Violation List</span>
+                            <a href="/admin_sanction_list">
+                            <span class="link-title">Sanction List</span>
                             </a>
                         </button>
                     </li>

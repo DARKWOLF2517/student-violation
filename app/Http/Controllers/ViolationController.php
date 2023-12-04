@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\student;
 use App\Models\Testimony;
+use App\Models\User;
 use App\Models\ViolationRecord;
+use App\Models\ViolationType;
+use App\Models\SanctionList;
+use App\Models\ViolationSanction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Psy\Readline\Hoa\Console;
@@ -14,10 +18,10 @@ class ViolationController extends Controller
     
     public function createViolation(Request $request)
     {   
-        // Validate the form data
+        // // Validate the form data
         $validatedData = $this->validate($request,[
             'id' => 'required',
-            'type_of_violation' => 'required',
+            'violation_type_id' => 'required',
             'remarks' => 'required',
             'officer' => 'required',
         ]);
@@ -26,7 +30,7 @@ class ViolationController extends Controller
         $violations = new ViolationRecord([
             'student_id' => $validatedData['id'],
             'violation_officer_id' => $validatedData['officer'],
-            'types_of_violation' => $validatedData['type_of_violation'],
+            'violation_type_id' => $validatedData['violation_type_id'],
             'remarks'  => $validatedData['remarks'],
             'status' => $validatedData['status']?? 0,
         ]);
@@ -42,12 +46,14 @@ class ViolationController extends Controller
 
         $violation = ViolationRecord::all();
         $students = student::all();
-        
-
+        $violation_type = ViolationType::all();
+        $user = User::all();
 
         return response()->json([
             'violations' => $violation, 
             'students' => $students,
+            'violation_type' => $violation_type,
+            'user' => $user,
             ]);
 
             
@@ -94,16 +100,15 @@ class ViolationController extends Controller
 
     public function updateViolation(Request $request, ViolationRecord $id)
     {   
-
         $request -> validate([
-            'type_of_violation' => 'required',
+            'violation_type_id' => 'required',
             'remarks' => 'required',
         ]);
 
         $id->update($request->all());
         
         return response()->json(['message' => 'Violation Updated Successfully']);
-        // return $request;
+        // return $request['type_of_violation'];
     }
 
     public function updateViolationStatus($id, $decision)
@@ -131,5 +136,69 @@ class ViolationController extends Controller
         }
         // return $decision;
     }
+    public function getViolationType()
+    {   
+        $violation = ViolationType::all();
+        return  $violation;
+    }
+
+    // public function getViolationForValidation($id)
+    // {   
+
+    //     $violation = ViolationRecord::where('violation_list_id', $id)->get();
+    //     $students = student::all();
+    //     $violation_type = ViolationType::all();
+    //     $user = User::all();
+
+    //     return response()->json([
+    //         'violations' => $violation, 
+    //         'students' => $students,
+    //         'violation_type' => $violation_type,
+    //         'user' => $user,
+    //         ]);
+
+            
+    // }
+
+    public function getSanctionList()
+    {   
+        $sanction_list = SanctionList::all();
+        return $sanction_list->toJson();
+
+            
+    }
+
+    public function addSanction(Request $request)
+    {   
+
+        try {
+        
+            // Validate the form data
+            $sanction = $this->validate($request,[
+                'violation_list_id' => 'required',
+                'sanction' => 'required',
+
+            ]);
+
+            // Create a new Users instance
+            $violations = new ViolationSanction([
+                'violation_list_id' => $sanction['violation_list_id'],
+                'sanction_id' => $sanction['sanction'],
+            ]);
+            $violations->save();
+
+            // Redirect or return a response
+            return response()->json(['message' => 'Added Successfully']);
+    
+            } catch (\Exception $e) {
+    
+            DB::rollBack();
+            
+            return response()->json(['error' => $e->getMessage()]); 
+            }
+
+        // return $request;
+    }
+
 
 }

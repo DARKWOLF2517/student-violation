@@ -1,5 +1,4 @@
 <template>
-
 <div class="mt-2">
         <div class="row head-container">
             <div class="col-md-6 col-sm-12">
@@ -11,11 +10,11 @@
             <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;">
                 <div class="select-dropdown">
                     <!-- First dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center;">
-                        <option value="" disabled selected><i class="fas fa-filter"></i> Sort by</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="inactive">Pending</option>
+                    <select id="sort-select" class="form-control" style="text-align: center;" v-model="filterStatus" @change="this.filterItems()">
+                        <option value="4" disabled selected><i class="fas fa-filter"></i> Sort by</option>
+                        <option value="1">Approved</option>
+                        <option value="2">Declined</option>
+                        <option value="0">Pending</option>
                     </select>
                 </div>
 
@@ -32,7 +31,7 @@
                 <div class="student-buttons d-flex justify-content-end">
                     <div class="btn-group" role="group">
 
-                        <button @click=" this.clearViolation()" class="btn me-2" data-toggle="modal" data-target="#myModal" >
+                        <button @click=" this.clearViolation()" class="btn me-2" data-toggle="modal" data-target="#addViolationRecord" >
                             <i class="fas fa-plus"></i> Add Violation Slip
                         </button>
                         <!-- {{-- <button class="btn me-2" id="download" onclick="  downloadTableData()">
@@ -54,7 +53,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="violations in this.violation_list" :id="violations.violation_list_id">
+                        <tr v-for="violations in this.filtered_violation_status" :id="violations.violation_list_id">
                             <th scope="row">{{ violations.student_id }}</th>
                             <td>{{ violations.student_name }}</td>
                             <td>{{ violations.types_of_violation }}</td>
@@ -64,13 +63,13 @@
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
                                     <!-- {{-- <button type="button" class="btn" data-toggle="modal" data-target="#viewModal"><i class="fas fa-eye"> View</i></button> --}} -->
-                                    <button type="button" class="btn"  @click="this.id = violations.violation_list_id, this.clickAddTestimonies()"  data-toggle="modal" data-target="#addTestimonyModal"><i class="fas fa-plus"></i> Add</button>
+                                    <button type="button" class="btn"  @click="this.id = violations.violation_list_id, this.clickAddTestimonies()"  data-toggle="modal" data-target="#addTestimonyModal" v-if="violations.status == 0"><i class="fas fa-plus"></i> Add</button>
                                 </div>
                             </td>
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal" @click="this.submit = this.updateViolation, this.id = violations.violation_list_id,this.fetchUpdate()"> <i class="fas fa-pen"></i> Edit</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#addViolationRecord" @click="this.submit = this.updateViolation, this.id = violations.violation_list_id,this.fetchUpdate()"> <i class="fas fa-pen"></i> Edit</button>
                                     <button type="button" class="btn" @click="this.id = violations.violation_list_id " data-toggle="modal" data-target="#deleteConfirmation" ><i class="fas fa-trash"></i> Delete</button>
                                 </div>
                             </td>
@@ -82,7 +81,7 @@
     </div>
 
 <!-- Add new violation slip Modal -->
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="addViolationRecord">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -90,7 +89,7 @@
                 <h3 class="modal-title" v-else-if="this.submit === this.updateViolation">Edit Violation Report Slip</h3>
             </div>
             <div class="modal-body">
-                <form @submit="this.submit">
+                <form @submit.prevent="this.submit">
                     <div class="mb-3">
                         <label for="studentName" class="form-label">ID number of Student</label>
                         <input type="number" class="form-control" id="studentId" name="studentId" @click="this.idNumberFilter()" required v-model="this.violation.id" v-if="this.submit === this.submitViolation">
@@ -99,7 +98,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="violationType" class="form-label">Type of Violation</label>
-                        <input type="text" class="form-control" id="violationType" name="violationType" required v-model="this.violation.type_of_violation">
+                        <!-- <input type="text" class="form-control" id="violationType" name="violationType" required v-model="this.violation.violation_type_id"> -->
+                        <select id="sort-select" class="form-control" v-model="this.violation.violation_type_id" >
+                            <option value="" disabled>Select Violation Type</option>
+                            <option v-for="violation in this.violation_type"  :value=" violation.violation_type_id">{{ violation.description }}</option>
+                        </select>
                 
                     </div>
 
@@ -127,7 +130,7 @@
                 <h4 class="modal-title">Add Testimony</h4>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="this.submitTestimonies()">
+                <form @submit="this.submitTestimonies()">
                     <div class="mb-3">
                         <label for="studentName" class="form-label">Name of Student</label>
                         <input type="text" class="form-control" id="studentName" name="studentName"  readonly v-model="addTestimonyView.student_name">
@@ -201,14 +204,14 @@ export default{
             students_list:[],
             violation:{
                 id: '',
-                type_of_violation: '',
+                violation_type_id: '',
                 remarks: '',
                 officer: this.user_id,
 
             },
             violation_list:[],
             addTestimonyView :{
-                violation_list_id: 'sdf',
+                violation_list_id: '',
                 types_of_violation: '',
                 student_id:'',
                 student_name: '',
@@ -217,27 +220,64 @@ export default{
                 remarks: '',
                 witness:'',
                 testimonyDetails: '',
+                
             },
+            violation_type : [],
+            filtered_violation_status:[],
+            filterStatus:4
         }
     },
     mounted(){
-        console.log(this.user_id);
         this.getStudents();
         this.displayViolation();
+        this.fetchViolationType();
+    },
+    created(){
+        this.filterItems();
     },
     methods:{
+        filterItems() {
+            //FILTER OF violation
+            this.filtered_violation_status = [];
+            this.violation_list.forEach(violations=>{
+                // console.log(this.filterStatus + ' asdf');
+                // console.log(violations.status+ ' ba');
+                if (this.filterStatus == violations.status ){
+                    this.filtered_violation_status.push({
+                        violation_list_id: violations.violation_list_id,
+                        types_of_violation: violations.types_of_violation,
+                        student_id: violations.student_id,
+                        student_name: violations.student_name,
+                        status: violations.status,
+                        violation_officer: violations.violation_officer,
+                        remarks: violations.remarks,
+                    });
+                }
+            })
+            console.log( this.filtered_violation_status)
+        },
+        fetchViolationType(){
+            
+            axios.get(`/fetch_violation_type`)
+            .then(response => {
+                this.violation_type = response.data;
+            })
+            .catch(error => {
+                console.log(error)
+            });
+            
+        },
         fetchUpdate(){
             axios.get(`/fetch_update_violation_record/${this.id}`)
             .then(response => {
-
+                console.log(this.submit)
                 response.data.forEach(v =>{
                     this.violation = {
                         id: v.student_id,
-                        type_of_violation: v.types_of_violation,
+                        violation_type_id: v.violation_type_id,
                         remarks: v.remarks,
                     }
                 })
-                console.log(this.violation)
             
             })
             .catch(error => {
@@ -248,14 +288,14 @@ export default{
         updateViolation(){
             axios.put(`/updateViolation/${this.id}`, this.violation)
                 .then(response => {
+                    console.log(response.data)
                 })
                 .catch(error => {
-                    // console.error('Error updating user:', error);
-                    alert('Error updating user:', error)
+                    console.error('Error updating user:', error);
+                    // alert('Error updating user:', error)
                 });
         },
         deleteViolation(){
-            console.log(this.id);
             axios.delete(`/delete_violation/${this.id}`)
                     .then(response => {
                         console.log(response.data);
@@ -318,11 +358,12 @@ export default{
         clearViolation(){
             this.violation = {
                 id: '',
-                type_of_violation: '',
+                violation_type_id: '',
                 remarks: '',
                 officer: this.user_id,
 
             }
+            
             this.submit = this.submitViolation;
         
         },
@@ -390,22 +431,36 @@ export default{
                 this.violation_list = [];
                 const students = response.data.students;
                 const violation = response.data.violations;
-                violation.forEach(violate=>{
-                    students.forEach(stud => {
-                        if (stud.student_id === violate.student_id){
-                            this.violation_list.push({
-                                violation_list_id : violate.violation_list_id,
-                                types_of_violation: violate.types_of_violation,
-                                student_id: violate.student_id,
-                                student_name: stud.name,
-                                status: violate.status,
-                                violation_officer: violate.violation_officer_id,
-                                remarks: violate.remarks,
-                            })
+                const violation_type = response.data.violation_type;
+                const users = response.data.user;
+
+                const violationList = [];
+
+                violation.forEach(violate => {
+                    const matchedStudent = students.find(stud => stud.student_id === violate.student_id);
+                    if (matchedStudent) {
+                        const matchedViolationType = violation_type.find(type => violate.violation_type_id === type.violation_type_id);
+                        if (matchedViolationType) {
+                            const matchedUser = users.find(user => user.id === violate.violation_officer_id);
+                            if (matchedUser) {
+                                violationList.push({
+                                    violation_list_id: violate.violation_list_id,
+                                    types_of_violation: matchedViolationType.description,
+                                    student_id: violate.student_id,
+                                    student_name: matchedStudent.name,
+                                    status: violate.status,
+                                    violation_officer: matchedUser.fullname,
+                                    remarks: violate.remarks,
+                                });
+                            }
                         }
-                    });
-                })
-                console.log(this.violation_list);        
+                    }
+                });
+
+                // Assuming you want to assign violationList to this.violation_list
+                this.violation_list = violationList;
+                this.filtered_violation_status = this.violation_list;
+
             })
             .catch(error => {
                 console.log(error)

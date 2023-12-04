@@ -28,7 +28,7 @@
                     </select>
                 </div>
             </div>
-            <h4> <i class="fas fa-list mt-2"></i>  Testimony</h4>
+            <h4> <i class="fas fa-list mt-2"></i>  Violation Validation</h4>
             <div class="student-buttons d-flex justify-content-end">
                 <div class="btn-group" role="group">
                     <!-- <button class="btn me-2" id="add-student-list-button" onclick="printTableData()">
@@ -68,8 +68,8 @@
 
                             <td>
                                 <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#addSanctionModal" > <i class="fas fa-check"></i> Approve</button>
-                                    <button type="button" class="btn" @click="this.decision = 0,this.id = violation.violation_list_id, this.validate()"><i class="fas fa-times"></i> Disapprove</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#addSanctionModal" @click="this.decision = 1,this.id = violation.violation_list_id,this.violation_type_id = violation.violation_type_id , this.fetchViolation()" > <i class="fas fa-check"></i> Approve</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#confirmationDisaprove"  @click="this.decision = 2,this.id = violation.violation_list_id, this.addSanction()"><i class="fas fa-times"></i> Disapprove</button>
                                 </div>
                             </td>
                         </tr>
@@ -88,31 +88,30 @@
                 <h4 class="modal-title">Select Sanction</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form @submit.prevent="this.addSanction">
                     <div class="mb-3">
                         <label for="studentName" class="form-label">Name of Student</label>
-                        <input type="text" class="form-control" id="studentName" name="studentName"  readonly>
+                        <input type="text" class="form-control" id="studentName" name="studentName"  readonly v-model="sanction_modal.student_name">
                     </div>
 
                     <div class="mb-3">
                         <label for="violationOfficer" class="form-label">Name of Violation Officer</label>
-                        <input type="text" class="form-control" id="violationOfficer" name="violationOfficer"  readonly>
+                        <input type="text" class="form-control" id="violationOfficer" name="violationOfficer"  readonly v-model="sanction_modal.violation_officer">
                     </div>
 
                     <div class="mb-3">
                         <label for="violationTypeGiven" class="form-label">Type of Violation Given</label>
-                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven"  readonly>
+                        <input type="text" class="form-control" id="violationTypeGiven" name="violationTypeGiven"  readonly  v-model="sanction_modal.types_of_violation">
                     </div>
                     <div class="mb-3">
                         <label for="remarks" class="form-label">Remarks</label>
-                        <textarea  class="form-control" id="remarks" name="remarks" rows="3"  readonly></textarea>
+                        <textarea  class="form-control" id="remarks" name="remarks" rows="3"  readonly v-model="sanction_modal.types_of_violation">
+                        </textarea>
                     </div>
                     <div class="mb-3">
                     <label for="sanctionTypeGiven" class="form-label">Select Sanction</label>
-                    <select class="form-select" id="sanctionTypeGiven" name="sanctionTypeGiven">
-                        <option value="1">1st Offense</option>
-                        <option value="2">2nd Offense</option>
-                        <option value="3">3rd Offense</option>
+                    <select class="form-select" id="sanctionTypeGiven" name="sanctionTypeGiven" v-model="sanction_modal.sanction">
+                        <option v-for="sanction in this.sanction_drop_down" :value="sanction.sanction_id">{{ sanction.description }}</option>
                     </select>
                 </div>
 
@@ -167,21 +166,63 @@ export default{
     data(){
         return{
             id: '',
+            violation_type_id: '',
             decision: 0,
             violation_list: [],
             testimony_list:[],
             testimony_list_temporary:[],
             violation_testimony_id: 0,
-
+            sanction_modal: [],
+            sanction_list: [],
+            sanction_drop_down: [],
         }
     },
     mounted(){
         this.showData();
         this.showTestimony();
+        this.fetchSanction();
     },
     methods:{
-        validate(){
+        fetchViolation(){
+            this.violation_list.forEach(violation=>{
+                if (violation.violation_list_id === this.id){
+                    this.sanction_modal = {
+                        student_name: violation.student_name,
+                        violation_officer: violation.violation_officer,
+                        types_of_violation: violation.types_of_violation,
+                        violation_type_id: violation.violation_type_id,
+                        remarks: violation.remarks,
+                        sanction: '',
+                        violation_list_id: this.id
+                    }
+                }
 
+
+                
+            })
+            this.sanction_drop_down = [],
+            this.sanction_list.forEach(sanction=>{
+                    if (sanction.violation_type_id === this.violation_type_id){
+                        this.sanction_drop_down.push({
+                            sanction_id: sanction.sanction_id,
+                            description: sanction.description,
+                            violation_type_id: sanction.violation_type_id,
+                        })
+                    }
+                })
+            console.log(this.sanction_drop_down)
+        },
+        fetchSanction(){
+            axios.get('/sanction_list')
+            .then(response => {
+                this.sanction_list = response.data;
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        },
+        updateViolationStatus() {
+            //for updating violation status
             axios.put(`/updateViolationStatus/${this.id}/${this.decision}`)
                 .then(response => {
                     console.log(response.data)
@@ -191,29 +232,55 @@ export default{
                     alert('Error updating user:', error)
                 });
         },
+        addSanction(){
+            this.updateViolationStatus();
+            //for adding sanction
+            axios.put(`/add_sanction`, this.sanction_modal)
+            .then(response => {
+                console.log(response.data)
+            })
+            .catch(error => {
+                // console.error('Error updating user:', error);
+                alert('Error updating user:', error)
+            });
+        },
+
         showData(){
             axios.get('/getViolations')
             .then(response => {
-                console.log(response.data)
                 this.violation_list = [];
                 const students = response.data.students;
                 const violation = response.data.violations;
-                violation.forEach(violate=>{
-                    students.forEach(stud => {
-                        if (stud.student_id === violate.student_id){
-                            this.violation_list.push({
-                                violation_list_id : violate.violation_list_id,
-                                types_of_violation: violate.types_of_violation,
-                                student_id: violate.student_id,
-                                student_name: stud.name,
-                                status: violate.status,
-                                violation_officer: violate.violation_officer_id,
-                                remarks: violate.remarks,
-                            })
+                const violation_type = response.data.violation_type;
+                const users = response.data.user;
+
+                const violationList = [];
+
+                violation.forEach(violate => {
+                    const matchedStudent = students.find(stud => stud.student_id === violate.student_id);
+                    if (matchedStudent) {
+                        const matchedViolationType = violation_type.find(type => violate.violation_type_id === type.violation_type_id);
+                        if (matchedViolationType) {
+                            const matchedUser = users.find(user => user.id === violate.violation_officer_id);
+                            if (matchedUser) {
+                                violationList.push({
+                                    violation_list_id: violate.violation_list_id,
+                                    types_of_violation: matchedViolationType.description,
+                                    student_id: violate.student_id,
+                                    student_name: matchedStudent.name,
+                                    status: violate.status,
+                                    violation_officer: matchedUser.fullname,
+                                    violation_type_id: violate.violation_type_id,
+                                    remarks: violate.remarks,
+                                });
+                            }
                         }
-                    });
-                })
-                console.log('asdfads');
+                    }
+                });
+
+                // Assuming you want to assign violationList to this.violation_list
+                this.violation_list = violationList;
+
             })
             .catch(error => {
                 console.log(error)
@@ -223,7 +290,6 @@ export default{
             axios.get('/getTestimony')
             .then(response => {
                 this.testimony_list = response.data;
-                console.log(this.testimony_list)
             })
             .catch(error => {
                 console.log(error)

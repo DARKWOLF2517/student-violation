@@ -43,10 +43,10 @@ methods:{
                     window.location.href = '/admin_dashboard';
                 }
                 else if(response.data == 2){
-                    window.location.href = 'student_attendance';
+                    window.location.href = '/clerk_dashboard';
                 }
                 else if(response.data == 3){
-                    window.location.href = '/login/options';
+                    window.location.href = '/violation_officer_dashboard';
                 }
                 else if(response.data == 'error'){
                     this.error = '1';

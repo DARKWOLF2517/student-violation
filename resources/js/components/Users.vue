@@ -97,8 +97,8 @@
 
                         <div class="form-group">
                         <label for="userRole">Role</label>
-                        <select class="form-control" id="userRole"  v-model="formData.role" v-for="role in this.roles">
-                            <option :value="role.role_id">{{ role.role_name }}</option>
+                        <select class="form-control" id="userRole"  v-model="formData.role" >
+                            <option v-for="role in this.roles" :value="role.role_id">{{ role.role_name }}</option>
                         </select>
                         </div>
                         <div class="modal-footer">

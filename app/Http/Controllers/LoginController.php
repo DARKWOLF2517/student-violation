@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -20,7 +22,7 @@ class LoginController extends Controller
             $userRoles = UserRoles::where('user_id', Auth::id())->first();
             // dd($userOrganization->organization->name);
             // session(['org_id' =>  $userRoles->student_org_id]);
-            // session(['org_name' =>  $userRoles->organization->name]);
+            // session(['username' =>  $userRoles->organization->name]);
             if($userRoles->role_id == 1){
                 // return redirect()->intended('/login/org_dashboard');
                 return '1';
@@ -28,6 +30,10 @@ class LoginController extends Controller
             else if($userRoles->role_id == 2){
                 // return redirect()->intended('/login/student_dashboard');
                 return '2';
+            }
+            else if($userRoles->role_id == 3){
+                // return redirect()->intended('/login/student_dashboard');
+                return '3';
             }
             else{
                 return redirect()->back();
@@ -43,5 +49,15 @@ class LoginController extends Controller
         // return $request;
         // return $request;
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+
+    }
+
 
 }

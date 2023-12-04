@@ -16,7 +16,7 @@ class ViolationRecord extends Model
     protected $fillable = [
         'student_id',
         'violation_officer_id',
-        'types_of_violation',
+        'violation_type_id',
         'remarks',
         'status'
     ];

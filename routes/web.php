@@ -48,8 +48,6 @@ Route::get('/violation1_list', function () {
 });
 
 // CLERK ROUTES
-
-
 Route::get('/clerk_dashboard', function () {
     return view('clerk.clerk_dashboard');
 });
@@ -59,6 +57,9 @@ Route::get('/clerk_violation_records', function () {
     return view('clerk.clerk_violation_records');
 });
 
+Route::get('/clerk_validation', function () {
+    return view('clerk.clerk_violation_validation');
+});
 Route::get('/clerk_sanction_list', function () {
     return view('clerk.clerk_sanction_list');
 });
@@ -71,17 +72,17 @@ Route::get('/clerk_review', function () {
 //Violation Officer ROUTES
 
 Route::get('/violation_officer_dashboard', function () {
-    return view('violation_officer.violation_officer_dashboard');
+    return view('violationofficer.violation_officer_dashboard');
 });
-
-
 Route::get('/violation_officer_violation_records', function () {
-    return view('violation_officer.violation_officer_violation_records');
+    return view('violationofficer.violation_officer_violation_records');
 });
 
-
+//login route
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
-//admin route
+Route::get('/logout', [LoginController::class, 'logout']);
+
+//violation route
 Route::get('/users_get', [UserController::class, 'getUsers']);
 Route::post('/create_user', [UserController::class, 'createUser']);
 Route::get('/get_students', [UserController::class, 'getStudents']);
@@ -89,8 +90,13 @@ Route::post('/create_violation', [ViolationController::class, 'createViolation']
 Route::get('/getViolations', [ViolationController::class, 'getViolation']);
 Route::post('/create_testimony', [ViolationController::class, 'createTestimony']);
 Route::get('/getTestimony', [ViolationController::class, 'getTestimony']);
-
 Route::delete('/delete_violation/{violation}', [ViolationController::class, 'deleteViolation']);
 Route::get('/fetch_update_violation_record/{id}', [ViolationController::class, 'getUpdateViolationRecord']);
 Route::put('/updateViolation/{id}', [ViolationController::class, 'updateViolation']);
 Route::put('/updateViolationStatus/{id}/{decision}', [ViolationController::class, 'updateViolationStatus']);
+Route::get('/fetch_violation_type', [ViolationController::class, 'getViolationType']);
+
+//validation route
+// Route::get('/fetch_violation_record/{id}', [ViolationController::class, 'getViolationForValidation']);
+Route::get('/sanction_list', [ViolationController::class, 'getSanctionList']);
+Route::put('/add_sanction', [ViolationController::class, 'addSanction']);

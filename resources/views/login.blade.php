@@ -8,10 +8,10 @@
     @vite('resources/js/app.js', 'build')
 </head>
 <body>
-    
+
     <div id="app">
         <login-form>
-            
+
         </login-form>
     </div>
 </body>
@@ -83,7 +83,7 @@
       margin: 0 auto;
       height: 120px;
       width: 120px;
-      
+
     }
     .top-nav {
     position: absolute;
@@ -111,10 +111,10 @@ a{
     align-items: center;
     color: #ffffff;
     text-decoration: none;
-    margin-right: 0.625rem; 
+    margin-right: 0.625rem;
 }
 .top-nav .profile-dropdown .profile-name {
-    margin-right: 0.3125rem; 
+    margin-right: 0.3125rem;
 }
 
     </style>
@@ -134,7 +134,7 @@ a{
     <div class="col-md-6 col-lg-5">
         <div class="login-wrap p-4 p-md-5">
             <!-- Add the following HTML code inside the login-wrap div -->
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv9l358ODwRTNT22tUmqxPLT0NmOGaNQmC24YIele5vg&s" alt="Login Image" class="img-fluid mb-4">
+            <img src="/asset/cmu-logo.png" alt="Login Image" class="img-fluid mb-4">
             <div id="loading-placeholder" class="text-center" style="display: none;">
             <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
@@ -145,10 +145,10 @@ a{
 
         <!-- Inside the form, add labels for the username and password inputs -->
             <login-form>
-                
+
             </login-form>
         </div>
-        </div>  
+        </div>
     </div>
 </div>
 </body>

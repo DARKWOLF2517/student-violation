@@ -16,29 +16,8 @@
                         <option value="declined">Declined</option>
                     </select>
                 </div>
-
-
-                <div class="select-dropdown" id= "semester-btn" style="margin-left: 20px; width: 270px;">
-                    <!-- Second dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center; ">
-                        <option value="">Select Semester</option>
-                        <option value="option1">1st Semester 2023-2024</option>
-                        <option value="option2">2nd Semester 2022-2023</option>
-                        <option value="option3">1st Semester 2022-2023</option>
-                    </select>
-                </div>
             </div>
             <h4> <i class="fas fa-list mt-2"></i>  Violation Validation</h4>
-            <div class="student-buttons d-flex justify-content-end">
-                <div class="btn-group" role="group">
-                    <!-- <button class="btn me-2" id="add-student-list-button" onclick="printTableData()">
-                        <i class="fas fa-print"></i> Print
-                    </button> -->
-                    <!-- {{-- <button class="btn me-2" id="add-student-button" onclick="  downloadTableData()">
-                        <i class="fas fa-download"></i> Download
-                    </button> --}} -->
-                </div>
-            </div>
             <div class="table-container">
                 <table class="table table-hover">
                     <thead>
@@ -198,7 +177,7 @@ export default{
                 }
 
 
-                
+
             })
             this.sanction_drop_down = [],
             this.sanction_list.forEach(sanction=>{

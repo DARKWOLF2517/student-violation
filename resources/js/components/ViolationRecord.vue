@@ -17,15 +17,6 @@
                         <option value="0">Pending</option>
                     </select>
                 </div>
-
-
-                <div class="select-dropdown" id= "semester-btn" style="margin-left: 20px; width: 270px;">
-                    <!-- Second dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center; ">
-                        <option value="">Select School Year</option>
-                        <option value="option1">1st Semester 2023-2024</option>
-                    </select>
-                </div>
             </div>
             <h4> <i class="fas fa-list mt-2"></i>  Violation records</h4>
                 <div class="student-buttons d-flex justify-content-end">
@@ -94,7 +85,7 @@
                         <label for="studentName" class="form-label">ID number of Student</label>
                         <input type="number" class="form-control" id="studentId" name="studentId" @click="this.idNumberFilter()" required v-model="this.violation.id" v-if="this.submit === this.submitViolation">
                         <input type="number" class="form-control" id="studentId" name="studentId" readonly @click="this.idNumberFilter()" required v-model="this.violation.id" v-else-if="this.submit === this.updateViolation">
-                        <div id="suggestionList"></div>    
+                        <div id="suggestionList"></div>
                     </div>
                     <div class="mb-3">
                         <label for="violationType" class="form-label">Type of Violation</label>
@@ -103,7 +94,7 @@
                             <option value="" disabled>Select Violation Type</option>
                             <option v-for="violation in this.violation_type"  :value=" violation.violation_type_id">{{ violation.description }}</option>
                         </select>
-                
+
                     </div>
 
                     <div class="mb-3">
@@ -159,7 +150,7 @@
                         <textarea class="form-control" id="testimonyDetails" name="testimonyDetails" rows="3" required v-model="addTestimonyView.testimonyDetails"></textarea>
                     </div>
 
-            
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary" >Submit</button>
@@ -220,7 +211,7 @@ export default{
                 remarks: '',
                 witness:'',
                 testimonyDetails: '',
-                
+
             },
             violation_type : [],
             filtered_violation_status:[],
@@ -257,7 +248,7 @@ export default{
             console.log( this.filtered_violation_status)
         },
         fetchViolationType(){
-            
+
             axios.get(`/fetch_violation_type`)
             .then(response => {
                 this.violation_type = response.data;
@@ -265,7 +256,7 @@ export default{
             .catch(error => {
                 console.log(error)
             });
-            
+
         },
         fetchUpdate(){
             axios.get(`/fetch_update_violation_record/${this.id}`)
@@ -278,7 +269,7 @@ export default{
                         remarks: v.remarks,
                     }
                 })
-            
+
             })
             .catch(error => {
                 console.log(error)
@@ -350,10 +341,10 @@ export default{
                 testimonyDetails: '',
 
             }
-                
+
             });
             console.log(this.addTestimonyView)
-            
+
         },
         clearViolation(){
             this.violation = {
@@ -363,9 +354,9 @@ export default{
                 officer: this.user_id,
 
             }
-            
+
             this.submit = this.submitViolation;
-        
+
         },
         submitViolation(){
             axios.post('/create_violation', this.violation)
@@ -385,7 +376,7 @@ export default{
 
                 const students = response.data.student_belongs;
                 this.students_list = students.map(student => student.student_id);
-            
+
             })
             .catch(error => {
                 console.log(error)
@@ -415,7 +406,7 @@ export default{
                 });
                 suggestionList.appendChild(suggestionItem);
             });
-            
+
             // Hide suggestion list if no suggestions
             if (userInput === 0 || suggestions.length === 0) {
                 suggestionList.innerHTML = '';
@@ -423,7 +414,7 @@ export default{
             });
 
 
-        },  
+        },
         displayViolation(){
             axios.get('/getViolations')
             .then(response => {

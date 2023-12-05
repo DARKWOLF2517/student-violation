@@ -30,53 +30,55 @@
                         <option value="inactive">Pending</option>
                     </select>
                 </div>
-
-
-                <div class="select-dropdown" id= "semester-btn" style="margin-left: 20px; width: 270px;">
-                    <!-- Second dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center; ">
-                        <option value="">Select School Year</option>
-                        <option value="option1">1st Semester 2023-2024</option>
-                    </select>
-                </div>
             </div>
             <h4> <i class="fas fa-list mt-2"></i>  Violation records</h4>
-                <div class="student-buttons d-flex justify-content-end">
+                {{-- <div class="student-buttons d-flex justify-content-end">
                     <div class="btn-group" role="group">
-                        <button class="btn me-2" data-toggle="modal" data-target="#addSanctionModal">
-                            <i class="fas fa-plus"></i> Add New Sanction
-                        </button>
                         <button class="btn me-2" data-toggle="modal" data-target="#addViolationModal">
                             <i class="fas fa-plus"></i> Add New Violation
                         </button>
+                        <button class="btn me-2" data-toggle="modal" data-target="#addSanctionModal">
+                            <i class="fas fa-plus"></i> Add New Sanction
+                        </button>
                     </div>
+                </div> --}}
+
+                <div class="table-container">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Violation Name</th>
+                                <th scope="col">Sanction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Littering (p. 72 #22)</td>
+                                <td>
+                                    <ul>
+                                        <li>1st Offense - 1 hr. Picking up</li>
+                                        <li>2nd Offense - 2 hrs. Picking up</li>
+                                        <li>3rd Offense - 3 hrs. Picking up</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Littering (p. 72 #22)</td>
+                                <td>
+                                    <ul>
+                                        <li>1st Offense - 1 hr. Picking up</li>
+                                        <li>2nd Offense - 2 hrs. Picking up</li>
+                                        <li>3rd Offense - 3 hrs. Picking up</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-            <div class="table-container">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Violation Name</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Drunkenness</td>
-
-                            <td>
-                                <div class="btn-group" role="group" aria-label="Action buttons">
-                                    <button type="button" class="btn"  data-toggle="modal" data-target="#myModal"><i class="fas fa-eye"></i> View</button>
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#editModal"> <i class="fas fa-edit"></i> Edit</button>
-                                    <button type="button" class="btn"><i class="fas fa-trash"></i> Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
                 <!-- Edit Violation Modal -->

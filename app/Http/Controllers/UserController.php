@@ -54,7 +54,7 @@ class UserController extends Controller
             'id' => $validatedData['user_id'],
             'fullname' => $validatedData['name'],
             'email' => $validatedData['email'],
-            'password' => Hash::make('2020301072'),
+            'password' => Hash::make($validatedData['user_id']),
         ]);
         $users->save();
         
@@ -69,8 +69,8 @@ class UserController extends Controller
 
 
         // Redirect or return a response
-        return response()->json(['message' => 'User Created Successfully']);
-        // return $request['name'];
+        // return response()->json(['message' => 'User Created Successfully']);
+        return $request;
     }
 
 }

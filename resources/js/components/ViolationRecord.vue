@@ -3,15 +3,15 @@
         <div class="row head-container">
             <div class="col-md-6 col-sm-12">
                 <div class="input-container">
-                    <input type="text" placeholder="Search">
+                    <input type="text" placeholder="Search"  v-model="searchTerm" @input="filterItems">
                 </div>
             </div>
 
             <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;">
                 <div class="select-dropdown">
                     <!-- First dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center;" v-model="filterStatus" @change="this.filterItems()">
-                        <option value="4" disabled selected><i class="fas fa-filter"></i> Sort by</option>
+                    <select id="sort-select" class="form-control" style="text-align: center;" v-model="filterStatus" @change="filterItems">
+                        <option value="" disabled selected><i class="fas fa-filter"></i> Sort by</option>
                         <option value="1">Approved</option>
                         <option value="2">Declined</option>
                         <option value="0">Pending</option>
@@ -47,7 +47,7 @@
                         <tr v-for="violations in this.filtered_violation_status" :id="violations.violation_list_id">
                             <th scope="row">{{ violations.student_id }}</th>
                             <td>{{ violations.student_name }}</td>
-                            <td>{{ violations.types_of_violation }}</td>
+                            <td style="width: 20%;">{{ violations.types_of_violation }}</td>
                             <td v-if="violations.status == 1" style="color: green; font-weight:bold;">Approved</td>
                             <td v-else-if="violations.status == 0" style="color: rgb(174, 174, 10); font-weight:bold;">Pending</td>
                             <td v-else-if="violations.status == 2" style="color: red; font-weight:bold;">Declined</td>
@@ -215,7 +215,8 @@ export default{
             },
             violation_type : [],
             filtered_violation_status:[],
-            filterStatus:4
+            filterStatus: '',
+            searchTerm:'',
         }
     },
     mounted(){
@@ -224,29 +225,66 @@ export default{
         this.fetchViolationType();
     },
     created(){
-        this.filterItems();
+
     },
     methods:{
         filterItems() {
-            //FILTER OF violation
-            this.filtered_violation_status = [];
-            this.violation_list.forEach(violations=>{
-                // console.log(this.filterStatus + ' asdf');
-                // console.log(violations.status+ ' ba');
-                if (this.filterStatus == violations.status ){
-                    this.filtered_violation_status.push({
-                        violation_list_id: violations.violation_list_id,
-                        types_of_violation: violations.types_of_violation,
-                        student_id: violations.student_id,
-                        student_name: violations.student_name,
-                        status: violations.status,
-                        violation_officer: violations.violation_officer,
-                        remarks: violations.remarks,
-                    });
-                }
-            })
-            console.log( this.filtered_violation_status)
+            //FILTER OF FINES
+            // this.filter_violation_status = this.violation_list.filter(item => {
+            //     // console.log(item.status.toString());
+            //     return (
+            //         item.status.toString().includes(this.filterStatus)||
+            //         item.student_name.toLowerCase().includes(this.searchTerm.toLowerCase())||
+            //         item.student_id.toString().includes(this.searchTerm) 
+
+            //     );
+            // });
+            // Filter based on searchTerm from textbox
+            let filteredBySearch = this.violation_list;
+            if (this.searchTerm) {
+                const searchTermLower = this.searchTerm.toLowerCase();
+                filteredBySearch = filteredBySearch.filter(item => 
+                    item.student_name.toLowerCase().includes(searchTermLower) ||
+                    item.student_id.toString().includes(this.searchTerm)
+                );
+            }
+
+            // Filter based on filterStatus from select option
+            let filteredByStatus = this.violation_list;
+            if (this.filterStatus) {
+                filteredByStatus = filteredByStatus.filter(item =>
+                    item.status.toString().includes(this.filterStatus)
+                );
+            }
+
+            // Merge the results of both filters (independently applied)
+            this.filtered_violation_status = filteredBySearch.filter(item =>
+                filteredByStatus.includes(item)
+            );
+
+
+            
         },
+        // sort() {
+        //     //FILTER OF violation
+        //     this.filtered_violation_status = [];
+        //     this.violation_list.forEach(violations=>{
+        //         // console.log(this.filterStatus + ' asdf');
+        //         // console.log(violations.status+ ' ba');
+        //         if (this.filterStatus == violations.status ){
+        //             this.filtered_violation_status.push({
+        //                 violation_list_id: violations.violation_list_id,
+        //                 types_of_violation: violations.types_of_violation,
+        //                 student_id: violations.student_id,
+        //                 student_name: violations.student_name,
+        //                 status: violations.status,
+        //                 violation_officer: violations.violation_officer,
+        //                 remarks: violations.remarks,
+        //             });
+        //         }
+        //     })
+        //     console.log( this.filtered_violation_status)
+        // },
         fetchViolationType(){
 
             axios.get(`/fetch_violation_type`)

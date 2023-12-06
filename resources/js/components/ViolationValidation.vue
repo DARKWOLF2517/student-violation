@@ -3,17 +3,18 @@
         <div class="row head-container">
             <div class="col-md-6 col-sm-12">
                 <div class="input-container">
-                    <input type="text" placeholder="Search">
+                    <input type="text" placeholder="Search" v-model="searchTerm" @input="filterItems">
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;">
+            <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;" >
                 <div class="select-dropdown">
                     <!-- First dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center;">
+                    <select id="sort-select" class="form-control" style="text-align: center;" v-model="filterStatus" @change="filterItems">
                         <option value="" disabled selected><i class="fas fa-filter"></i> Sort by</option>
-                        <option value="approved">Approved</option>
-                        <option value="declined">Declined</option>
+                        <option value="1">Approved</option>
+                        <option value="2">Declined</option>
+                        <option value="0">Pending</option>
                     </select>
                 </div>
             </div>
@@ -31,10 +32,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="violation in this.violation_list"  :id="violation.violation_list_id">
+                        <tr v-for="violation in this.filter_violation_status"  :id="violation.violation_list_id">
                             <th scope="row">{{ violation.student_id }}</th>
                             <td>{{ violation.student_name }}</td>
-                            <td>{{ violation.types_of_violation }}</td>
+                            <td style="width: 20%;">{{ violation.types_of_violation }}</td>
                             <td v-if="violation.status == 1" style="color: green; font-weight:bold;">Approved</td>
                             <td v-else-if="violation.status == 0" style="color: rgb(174, 174, 10); font-weight:bold;">Pending</td>
                             <td v-else-if="violation.status == 2" style="color: red; font-weight:bold;">Declined</td>
@@ -172,6 +173,9 @@ export default{
             sanction_modal: [],
             sanction_list: [],
             sanction_drop_down: [],
+            filterStatus: '',
+            searchTerm:'',
+            filter_violation_status:[],
         }
     },
     mounted(){
@@ -180,6 +184,33 @@ export default{
         this.fetchSanction();
     },
     methods:{
+        filterItems() {
+            // Filter based on searchTerm from textbox
+            let filteredBySearch = this.violation_list;
+            if (this.searchTerm) {
+                const searchTermLower = this.searchTerm.toLowerCase();
+                filteredBySearch = filteredBySearch.filter(item => 
+                    item.student_name.toLowerCase().includes(searchTermLower) ||
+                    item.student_id.toString().includes(this.searchTerm)
+                );
+            }
+
+            // Filter based on filterStatus from select option
+            let filteredByStatus = this.violation_list;
+            if (this.filterStatus) {
+                filteredByStatus = filteredByStatus.filter(item =>
+                    item.status.toString().includes(this.filterStatus)
+                );
+            }
+
+            // Merge the results of both filters (independently applied)
+            this.filter_violation_status = filteredBySearch.filter(item =>
+                filteredByStatus.includes(item)
+            );
+
+
+            
+        },
         fetchViolation(){
             this.violation_list.forEach(violation=>{
                 if (violation.violation_list_id === this.id){
@@ -278,6 +309,7 @@ export default{
 
                 // Assuming you want to assign violationList to this.violation_list
                 this.violation_list = violationList;
+                this.filter_violation_status = this.violation_list;
 
             })
             .catch(error => {

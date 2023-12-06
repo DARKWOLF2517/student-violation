@@ -87,7 +87,7 @@
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-book-reader"></i>
                             <a href="/admin_sanction_list">
-                            <span class="link-title">Sanctions</span>
+                            <span class="link-title">Sanction List</span>
                             </a>
                         </button>
                     </li>

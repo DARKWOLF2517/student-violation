@@ -3,31 +3,20 @@
         <div class="row head-container">
             <div class="col-md-6 col-sm-12">
                 <div class="input-container">
-                    <input type="text" placeholder="Search">
+                    <input type="text" placeholder="Search" v-model="searchTerm" @input="filterItems">
                 </div>
             </div>
 
             <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;">
                 <div class="select-dropdown">
                     <!-- First dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center;">
+                    <select id="sort-select" class="form-control" style="text-align: center;"   v-model="filterStatus" @change="filterItems">
                         <option value="" disabled selected><i class="fas fa-filter"></i> Sort by</option>
-                        <option value="clerk">Clerk</option>
-                        <option value="clerk">Violation Officer</option>
-                        <option value="Admin">Admin</option>
+                        <option v-for="role in this.roles" :value="role.role_id">{{ role.role_name }}</option>
+                        
                     </select>
                 </div>
 
-
-                <div class="select-dropdown" id= "semester-btn" style="margin-left: 20px; width: 270px;">
-                    <!-- Second dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center; ">
-                        <option value="">Select Semester</option>
-                        <option value="option1">1st Semester 2023-2024</option>
-                        <option value="option2">2nd Semester 2022-2023</option>
-                        <option value="option3">1st Semester 2022-2023</option>
-                    </select>
-                </div>
             </div>
             <h4> <i class="fas fa-list mt-2"></i>  Student Records</h4>
             <div class="student-buttons d-flex justify-content-end">
@@ -50,7 +39,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="users in this.users" :id="users.id">
+                <tr v-for="users in this.filtered_users" :id="users.id">
                     <th scope="row">{{ users.id }}</th>
                     <td>{{ users.fullname }}</td>
                     <td>{{ users.role }}</td>
@@ -126,6 +115,9 @@ export default{
                 role: '',
             },
             roles: [],
+            filtered_users:[],
+            filterStatus: '',
+            searchTerm:'',
         }
     },
     mounted(){
@@ -133,6 +125,33 @@ export default{
         this.fetchData();
     },
     methods:{
+        filterItems() {
+            console.log(this.filterStatus)
+            let filteredBySearch = this.users;
+            if (this.searchTerm) {
+                const searchTermLower = this.searchTerm.toLowerCase();
+                filteredBySearch = filteredBySearch.filter(item => 
+                    item.fullname.toLowerCase().includes(searchTermLower) ||
+                    item.id.toString().includes(this.searchTerm)
+                );
+            }
+
+            // Filter based on filterStatus from select option
+            let filteredByStatus = this.users;
+            if (this.filterStatus) {
+                filteredByStatus = filteredByStatus.filter(item =>
+                    item.role_id.toString().includes(this.filterStatus)
+                );
+            }
+
+            // Merge the results of both filters (independently applied)
+            this.filtered_users = filteredBySearch.filter(item =>
+            filteredByStatus.includes(item)
+            );
+
+
+            
+        },
         fetchData(){
             axios.get('/users_get')
             .then(response => {
@@ -152,6 +171,7 @@ export default{
                                 id: user.id,
                                 fullname:  user.fullname,
                                 role: role.role_name,
+                                role_id: role.role_id,
                             });
                         }
                             }
@@ -159,27 +179,26 @@ export default{
 
                     });
                 });
-
+                
+                this.filtered_users =  this.users;
 
             })
             .catch(error => {
                 console.log(error)
-                alert('sadfd')
+
             });
 
         },
         sendData(){
-
-
             axios.post('/create_user', this.formData)
             .then(response => {
                 console.log(response.data);
             })
             .catch(error => {
                 console.log(error)
-                alert('sadfd')
             });
         },
+
     },
 }
 </script>

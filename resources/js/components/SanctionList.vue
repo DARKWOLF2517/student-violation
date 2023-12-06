@@ -12,7 +12,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="violation in this.sanction_list">
-                                <td>{{ violation.description}}</td>
+                                <td style="width: 30%;">{{ violation.description}}</td>
                                 <td>
                                     <ul v-for=" sanction in violation.sanction">
                                         <li>{{ sanction.description }}</li>

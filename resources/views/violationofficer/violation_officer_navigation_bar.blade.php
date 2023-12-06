@@ -33,7 +33,7 @@
                 <div class="profile-dropdown dropdown">
                     <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://workforprosper.com/wp-content/plugins/supportboard/supportboard/media/user.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                        <span class="profile-name"><strong>Violation Officer</strong></span>
+                        <span class="profile-name"><strong>{{Auth::user()->fullname}}</strong></span>
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                         {{-- <li><a class="dropdown-item" href="#">Settings</a></li>
@@ -69,6 +69,22 @@
                             <i class="fas fa-list-alt"></i>
                             <a href="/violation_officer_violation_records">
                             <span class="link-title">Record Violation</span>
+                            </a>
+                        </button>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded events-button">
+                            <i class="fas fa-list-alt"></i>
+                            <a href="/violation_officer_violation_sanction">
+                            <span class="link-title">Violation Lists</span>
+                            </a>
+                        </button>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded events-button">
+                            <i class="fas fa-book-reader"></i>
+                            <a href="/violation_officer_sanction_list">
+                            <span class="link-title">Sanction List</span>
                             </a>
                         </button>
                     </li>

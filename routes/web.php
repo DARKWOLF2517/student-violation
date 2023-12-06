@@ -64,14 +64,13 @@ Route::get('/clerk_violation_records', function () {
 Route::get('/clerk_validation', function () {
     return view('clerk.clerk_violation_validation');
 });
+
+Route::get('/clerk_violation_sanction', function () {
+    return view('clerk.clerk_violation_sanction');
+});
 Route::get('/clerk_sanction_list', function () {
     return view('clerk.clerk_sanction_list');
 });
-
-Route::get('/clerk_review', function () {
-    return view('clerk.clerk_review_testimonies');
-});
-
 
 //Violation Officer ROUTES
 Route::get('/violation_officer_dashboard', function () {
@@ -80,6 +79,13 @@ Route::get('/violation_officer_dashboard', function () {
 Route::get('/violation_officer_violation_records', function () {
     return view('violationofficer.violation_officer_violation_records');
 });
+Route::get('/violation_officer_violation_sanction', function () {
+    return view('violationofficer.violation_officer_violation_sanction');
+});
+Route::get('/violation_officer_sanction_list', function () {
+    return view('violationofficer.violation_officer_sanction_list');
+});
+
 
 //login route
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);

@@ -76,6 +76,14 @@
                     </li>
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
+                            <i class="fas fa-list-alt"></i>
+                            <a href="/clerk_violation_sanction">
+                            <span class="link-title">Violation Lists</span>
+                            </a>
+                        </button>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-check"></i>
                             <a href="/clerk_validation">
                             <span class="link-title">Validation</span>
@@ -86,7 +94,7 @@
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-book-reader"></i>
                             <a href="/clerk_sanction_list">
-                            <span class="link-title">Sanctions</span>
+                            <span class="link-title">Sanction List</span>
                             </a>
                         </button>
                     </li>

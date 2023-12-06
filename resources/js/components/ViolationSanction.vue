@@ -3,15 +3,15 @@
             <div class="row head-container">
                 <div class="col-md-6 col-sm-12">
                     <div class="input-container">
-                        <input type="text" placeholder="Search">
+                        <input type="text" placeholder="Search" v-model="searchTerm" @input="filterItems">
                     </div>
                 </div>
     
                 <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;">
                     <div class="select-dropdown">
                         <!-- First dropdown -->
-                        <select id="sort-select" class="form-control" style="text-align: center;" v-model="filterStatus" @change="this.filterItems()">
-                            <option value="4" disabled selected><i class="fas fa-filter"></i> Sort by</option>
+                        <select id="sort-select" class="form-control" style="text-align: center;" v-model="filterStatus" @change="filterItems">
+                            <option value="" disabled selected><i class="fas fa-filter"></i> Sort by</option>
                             <option value="1">Approved</option>
                             <option value="2">Declined</option>
                             <option value="0">Pending</option>
@@ -34,10 +34,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="violations in this.filtered_violation_status" :id="violations.violation_list_id">
+                            <tr v-for="violations in this.filter_violation_status" :id="violations.violation_list_id">
                                 <th scope="row">{{ violations.student_id }}</th>
                                 <td>{{ violations.student_name }}</td>
-                                <td>{{ violations.types_of_violation }}</td>
+                                <td style="width: 20%;">{{ violations.types_of_violation }}</td>
                                 <td v-if="violations.status == 1" style="color: green; font-weight:bold;">Approved</td>
                                 <td v-else-if="violations.status == 0" style="color: rgb(174, 174, 10); font-weight:bold;">Pending</td>
                                 <td v-else-if="violations.status == 2" style="color: red; font-weight:bold;">Declined</td>
@@ -63,8 +63,9 @@
                 students_list:[],
                 violation_list:[],
                 violation_type : [],
-                filtered_violation_status:[],
-                filterStatus:4
+                filter_violation_status:[],
+                filterStatus: '',
+                searchTerm:'',
             }
         },
         mounted(){
@@ -73,28 +74,46 @@
             this.fetchViolationType();
         },
         created(){
-            this.filterItems();
+
         },
         methods:{
             filterItems() {
-                //FILTER OF violation
-                this.filtered_violation_status = [];
-                this.violation_list.forEach(violations=>{
-                    if (this.filterStatus == violations.status ){
-                        this.filtered_violation_status.push({
-                            violation_list_id: violations.violation_list_id,
-                            types_of_violation: violations.types_of_violation,
-                            student_id: violations.student_id,
-                            student_name: violations.student_name,
-                            status: violations.status,
-                            violation_officer: violations.violation_officer,
-                            remarks: violations.remarks,
-                            sanction: violations.sanction,
-                        });
-                    }
-                })
-                console.log( this.filtered_violation_status)
-            },
+            //FILTER OF FINES
+            // this.filter_violation_status = this.violation_list.filter(item => {
+            //     // console.log(item.status.toString());
+            //     return (
+            //         item.status.toString().includes(this.filterStatus)||
+            //         item.student_name.toLowerCase().includes(this.searchTerm.toLowerCase())||
+            //         item.student_id.toString().includes(this.searchTerm) 
+
+            //     );
+            // });
+            // Filter based on searchTerm from textbox
+            let filteredBySearch = this.violation_list;
+            if (this.searchTerm) {
+                const searchTermLower = this.searchTerm.toLowerCase();
+                filteredBySearch = filteredBySearch.filter(item => 
+                    item.student_name.toLowerCase().includes(searchTermLower) ||
+                    item.student_id.toString().includes(this.searchTerm)
+                );
+            }
+
+            // Filter based on filterStatus from select option
+            let filteredByStatus = this.violation_list;
+            if (this.filterStatus) {
+                filteredByStatus = filteredByStatus.filter(item =>
+                    item.status.toString().includes(this.filterStatus)
+                );
+            }
+
+            // Merge the results of both filters (independently applied)
+            this.filter_violation_status = filteredBySearch.filter(item =>
+                filteredByStatus.includes(item)
+            );
+
+
+        },
+
             fetchViolationType(){
     
                 axios.get(`/fetch_violation_type`)
@@ -121,7 +140,7 @@
             displayViolation(){
                 axios.get('/getViolations')
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     this.violation_list = [];
                     const students = response.data.students;
                     const violation = response.data.violations;
@@ -131,44 +150,32 @@
                     const sanction_list = response.data.sanction_list;
 
                     const violationList = [];
-    
+
                     violation.forEach(violate => {
                         const matchedStudent = students.find(stud => stud.student_id === violate.student_id);
-                        if (matchedStudent) {
-                            const matchedViolationType = violation_type.find(type => violate.violation_type_id === type.violation_type_id);
-                            if (matchedViolationType) {
-                                const matchedUser = users.find(user => user.id === violate.violation_officer_id);
-                                if (matchedUser) {
+                        const matchedViolationType = violation_type.find(type => violate.violation_type_id === type.violation_type_id);
+                        const matchedUser = users.find(user => user.id === violate.violation_officer_id);
+                        const matchedSanction = violation_sanction.find(vs => vs.violation_list_id === violate.violation_list_id);
+                        const matchedSanctionList = sanction_list.find(sl => sl.sanction_id === (matchedSanction ? matchedSanction.sanction_id : null));
 
-                                    violation_sanction.forEach(violation_sanction => {
-                                        if (violation_sanction.violation_list_id === violate.violation_list_id){
-                                            sanction_list.forEach(sanction_list => {
-
-                                                if(sanction_list.sanction_id == violation_sanction.sanction_id){
-                                                    // console.log(sanction_list.description)
-                                                    violationList.push({
-                                                    violation_list_id: violate.violation_list_id,
-                                                    types_of_violation: matchedViolationType.description,
-                                                    student_id: violate.student_id,
-                                                    student_name: matchedStudent.name,
-                                                    status: violate.status,
-                                                    violation_officer: matchedUser.fullname,
-                                                    remarks: violate.remarks,
-                                                    sanction: sanction_list.description,
-                                                });
-                                                }
-                                            });
-                                        }
-                                    });
-
-                                }
-                            }
+                        if (matchedStudent && matchedViolationType && matchedUser) {
+                            const violationData = {
+                                violation_list_id: violate.violation_list_id,
+                                types_of_violation: matchedViolationType.description,
+                                student_id: violate.student_id,
+                                student_name: matchedStudent.name,
+                                status: violate.status,
+                                violation_officer: matchedUser.fullname,
+                                remarks: violate.remarks,
+                                sanction: matchedSanctionList ? matchedSanctionList.description : '',
+                            };
+                            violationList.push(violationData);
                         }
                     });
-    
-                    // Assuming you want to assign violationList to this.violation_list
+
                     this.violation_list = violationList;
-                    this.filtered_violation_status = this.violation_list;
+                    this.filter_violation_status = this.violation_list;
+                    // console.log(this.violation_list);
     
                 })
                 .catch(error => {

@@ -35,6 +35,7 @@
                     <th scope="col">ID number</th>
                     <th scope="col">User</th>
                     <th scope="col">Role</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
@@ -43,12 +44,14 @@
                     <th scope="row">{{ users.id }}</th>
                     <td>{{ users.fullname }}</td>
                     <td>{{ users.role }}</td>
+                    <td style="color: green;"><b>Enabled</b></td>
+                    <!-- <td style="color: red;"><b>Disabled</b></td> -->
                     <td>
                         <div class="btn-group" role="group" aria-label="Action buttons">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editUserModal">
-                                <i class="fas fa-pen"></i> Edit
+                            <button type="button" class="btn">
+                                <i style="color: green;" class="fas fa-check"></i> Enable
                             </button>
-                            <button type="button" class="btn"><i class="fas fa-trash"></i> Delete</button>
+                            <button type="button" class="btn" ><i style="color: red;" class="fas fa-times"></i> Disable</button>
                         </div>
                     </td>
                 </tr>

@@ -67,7 +67,7 @@
 
                     <div class="feature-container">
                         <div class="feature">
-                            <i class="fas fa-check feature-icon"></i>
+                            <i class="	fas fa-clipboard-check feature-icon"></i>
                             <div class="feature-text">Violation Tracking</div>
                             <div class="feature-description">Track student violations in real-time</div>
                         </div>

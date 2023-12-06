@@ -82,14 +82,14 @@
                             </a>
                         </button>
                     </li>
-                    {{-- <li class="mb-1">
+                    <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-book-reader"></i>
                             <a href="/clerk_sanction_list">
-                            <span class="link-title">Sanction List</span>
+                            <span class="link-title">Sanctions</span>
                             </a>
                         </button>
-                    </li> --}}
+                    </li>
                     {{-- <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-book-reader"></i>

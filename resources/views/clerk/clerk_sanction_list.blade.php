@@ -31,14 +31,6 @@
                     </select>
                 </div>
 
-
-                <div class="select-dropdown" id= "semester-btn" style="margin-left: 20px; width: 270px;">
-                    <!-- Second dropdown -->
-                    <select id="sort-select" class="form-control" style="text-align: center; ">
-                        <option value="">Select School Year</option>
-                        <option value="option1">1st Semester 2023-2024</option>
-                    </select>
-                </div>
             </div>
             <h4> <i class="fas fa-list mt-2"></i>  Violation records</h4>
 

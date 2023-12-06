@@ -48,12 +48,16 @@ class ViolationController extends Controller
         $students = student::all();
         $violation_type = ViolationType::all();
         $user = User::all();
-
+        $violation_sanction = ViolationSanction::all();
+        $sanction_list = SanctionList::all();
+       
         return response()->json([
             'violations' => $violation, 
             'students' => $students,
             'violation_type' => $violation_type,
             'user' => $user,
+            'violation_sanction'=> $violation_sanction,
+            'sanction_list'=> $sanction_list,
             ]);
 
             

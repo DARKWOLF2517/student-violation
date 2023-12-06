@@ -80,7 +80,7 @@
                 <h3 class="modal-title" v-else-if="this.submit === this.updateViolation">Edit Violation Report Slip</h3>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="this.submit">
+                <form @submit="this.submit">
                     <div class="mb-3">
                         <label for="studentName" class="form-label">ID number of Student</label>
                         <input type="number" class="form-control" id="studentId" name="studentId" @click="this.idNumberFilter()" required v-model="this.violation.id" v-if="this.submit === this.submitViolation">

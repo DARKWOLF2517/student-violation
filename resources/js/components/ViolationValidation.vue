@@ -46,9 +46,10 @@
                             </td>
 
                             <td>
-                                <div class="btn-group" role="group" aria-label="Action buttons">
+                                
+                                <div class="btn-group" role="group" aria-label="Action buttons" v-if="violation.status == 0">
                                     <button type="button" class="btn" data-toggle="modal" data-target="#addSanctionModal" @click="this.decision = 1,this.id = violation.violation_list_id,this.violation_type_id = violation.violation_type_id , this.fetchViolation()" > <i class="fas fa-check"></i> Approve</button>
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#confirmationDisaprove"  @click="this.decision = 2,this.id = violation.violation_list_id, this.addSanction()"><i class="fas fa-times"></i> Disapprove</button>
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#confirmationDisaprove"  @click="this.decision = 2,this.id = violation.violation_list_id"><i class="fas fa-times"></i> Disapprove</button>
                                 </div>
                             </td>
                         </tr>
@@ -67,7 +68,7 @@
                 <h4 class="modal-title">Select Sanction</h4>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="this.addSanction">
+                <form @submit="this.addSanction">
                     <div class="mb-3">
                         <label for="studentName" class="form-label">Name of Student</label>
                         <input type="text" class="form-control" id="studentName" name="studentName"  readonly v-model="sanction_modal.student_name">
@@ -135,6 +136,23 @@
     </div>
 </div>
 
+    <!-- Disapprove confirmation -->
+    <div class="modal fade " id="confirmationDisaprove" tabindex="-1" aria-labelledby="confirmationDisaproveLabel" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><b>Are you sure you want to Disapprove this Violation?</b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" @click="this.updateViolationStatus()" data-dismiss="modal">Dissaprove</button>
+            </div>
+            </div>
+        </div>
+    </div>
 
 </template>
 
@@ -205,6 +223,7 @@ export default{
             axios.put(`/updateViolationStatus/${this.id}/${this.decision}`)
                 .then(response => {
                     console.log(response.data)
+                    this.showData();
                 })
                 .catch(error => {
                     // console.error('Error updating user:', error);

@@ -18,4 +18,9 @@ class ViolationType extends Model
         'description',
     ];
 
+    public function sanction()
+    {
+        return $this->hasMany(SanctionList::class, 'violation_type_id','violation_type_id');
+    }
+
 }

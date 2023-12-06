@@ -15,6 +15,6 @@ class ViolationSanction extends Model
 
     protected $fillable = [
         'violation_list_id',
-        'sanction_id',
+        'sanction_id',  
     ];
 }

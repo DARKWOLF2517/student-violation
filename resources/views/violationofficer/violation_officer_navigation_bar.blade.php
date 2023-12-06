@@ -68,7 +68,7 @@
                         <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-list-alt"></i>
                             <a href="/violation_officer_violation_records">
-                            <span class="link-title">Violation Records</span>
+                            <span class="link-title">Record Violation</span>
                             </a>
                         </button>
                     </li>

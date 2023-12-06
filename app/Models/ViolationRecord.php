@@ -26,5 +26,9 @@ class ViolationRecord extends Model
     {
         return $this->hasOne(User::class,'student_id','id');
     }
+    public function violation_sanction()
+    {
+        return $this->belongsTo(ViolationSanction::class,'violation_list_id','violation_list_id');
+    }
 }
 

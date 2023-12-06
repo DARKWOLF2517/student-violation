@@ -12,10 +12,10 @@
         </ol>
         </nav>
     </div>
-        <violation-list
+        <violation-sanction
         user_id = {{Auth::id()}}>
 
-        </violation-list>
+        </violation-sanction>
     </div>
 
 @endsection

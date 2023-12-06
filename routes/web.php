@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SanctionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViolationController;
 use App\Models\User;
@@ -46,6 +47,9 @@ Route::get('/admin_validation', function () {
 Route::get('/violation1_list', function () {
     return view('admin.violation_list');
 });
+Route::get('/admin_violation_sanction', function () {
+    return view('admin.admin_violation_sanction');
+});
 
 // CLERK ROUTES
 Route::get('/clerk_dashboard', function () {
@@ -70,7 +74,6 @@ Route::get('/clerk_review', function () {
 
 
 //Violation Officer ROUTES
-
 Route::get('/violation_officer_dashboard', function () {
     return view('violationofficer.violation_officer_dashboard');
 });
@@ -100,3 +103,6 @@ Route::get('/fetch_violation_type', [ViolationController::class, 'getViolationTy
 // Route::get('/fetch_violation_record/{id}', [ViolationController::class, 'getViolationForValidation']);
 Route::get('/sanction_list', [ViolationController::class, 'getSanctionList']);
 Route::put('/add_sanction', [ViolationController::class, 'addSanction']);
+
+//sanction route
+Route::get('/fetch_violation_sanction_list', [SanctionController::class, 'getViolationListWithSanction']);

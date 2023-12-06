@@ -77,6 +77,14 @@
                     </li>
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded events-button">
+                            <i class="fas fa-list-alt"></i>
+                            <a href="/admin_violation_sanction">
+                            <span class="link-title">Violation Lists</span>
+                            </a>
+                        </button>
+                    </li>
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded events-button">
                             <i class="fas fa-book-reader"></i>
                             <a href="/admin_sanction_list">
                             <span class="link-title">Sanction List</span>

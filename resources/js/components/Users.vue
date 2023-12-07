@@ -44,8 +44,8 @@
                     <th scope="row">{{ users.id }}</th>
                     <td>{{ users.fullname }}</td>
                     <td>{{ users.role }}</td>
-                    <td style="color: green;"><b>Enabled</b></td>
-                    <!-- <td style="color: red;"><b>Disabled</b></td> -->
+                    <td style="color: green;" v-if="users.status == 1"><b>Enabled</b></td>
+                    <td style="color: red;" v-else-if="users.status == 0"><b>Disabled</b></td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Action buttons">
                             <button type="button" class="btn"  data-bs-toggle="modal" data-bs-target="#enableUserModal">
@@ -181,6 +181,7 @@ export default{
                 const role = response.data.roles;
                 this.roles = role;
                 users.forEach(user => {
+                    console.log(user)
                     user_roles.forEach(user_role =>{
                         role.forEach(role=>{
 
@@ -191,6 +192,7 @@ export default{
                                 fullname:  user.fullname,
                                 role: role.role_name,
                                 role_id: role.role_id,
+                                status: user.status,
                             });
                         }
                             }

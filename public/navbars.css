@@ -13,26 +13,9 @@
 }
 
 
-.top-nav .notification-button {
-    display: flex;
-    align-items: center;
-    color: #ffffff;
-    text-decoration: none;
-    margin-right: 0.625rem;
-}
+
 .top-nav .profile-dropdown .profile-name {
     margin-right: 0.3125rem;
-}
-.rotate-icon .fas.fa-chevron-down {
-    transition: transform 0.5s ease-in-out;
-}
-
-.rotate-icon.collapsed .fas.fa-chevron-down {
-    transform: rotate(180deg);
-}
-
-.rotate-icon:not(.collapsed) .fas.fa-chevron-down {
-    transform: rotate(0deg);
 }
 
 .btn-toggle-nav {
@@ -106,4 +89,13 @@ margin-right: 0;
     background-color: white;
     border: 1px solid rgb(255, 255, 255);
     border-radius: 5px;
+}
+/* Media query for screens with a maximum width of 768 pixels */
+@media (max-width: 768px) {
+
+
+    .btn-toggle-nav {
+        margin-left: 0;
+    }
+
 }

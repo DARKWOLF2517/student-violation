@@ -77,9 +77,9 @@
                             <div class="feature-description">Easily search and filter violations by various criteria</div>
                         </div>
                         <div class="feature">
-                            <i class="fas fa-file feature-icon"></i>
-                            <div class="feature-text">Analytics and Reports</div>
-                            <div class="feature-description">Generate reports and analytics for better insights</div>
+                            <i class="fas fa-clipboard feature-icon"></i>
+                            <div class="feature-text">Record and Validate</div>
+                            <div class="feature-description">Record and Validate in one Click</div>
                         </div>
                     </div>
                 </div>

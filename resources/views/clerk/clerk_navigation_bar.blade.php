@@ -47,7 +47,7 @@
         </div>
 <!-- SIDE NAV BAR -->
     <div class="wrapper">
-        <div class=" p-3  sidebar" id="sidebarCollapse">
+        <div class="p-3 sidebar" id="sidebar">
             <div class="d-md-flex flex-shrink-0">
                 <ul class="list-unstyled ">
                     <li class="mb-1">
@@ -114,28 +114,21 @@
             @yield('main-content')
         </div>
     </div>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
-    <!-- FullCalendar JS -->
-    {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
     <script>
         document.onreadystatechange = () => {
             if (document.readyState === "complete") {
 
                 // Toggle the sidebar when the burger button is clicked
                 const toggleSidebarButton = document.getElementById('sidebar-toggle');
-                const sidebar = document.getElementById('sidebarCollapse');
-                const content = document.querySelector('.content');
-                const icon = document.querySelector('#sidebar-toggle i');
+                const sidebar = document.getElementById('sidebar');
 
                 toggleSidebarButton.addEventListener('click', function () {
-                    const isCollapsed = sidebar.classList.contains('collapsed');
-
                     sidebar.classList.toggle('collapsed');
-                    content.classList.toggle('collapsed');
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
                 });
+            }
+              // Collapse the sidebar by default on smaller screens
+            if (window.innerWidth <= 768) {
+                sidebar.classList.add('collapsed');
             }
         }
     </script>

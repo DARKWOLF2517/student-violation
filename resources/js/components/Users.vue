@@ -13,12 +13,12 @@
                     <select id="sort-select" class="form-control" style="text-align: center;"   v-model="filterStatus" @change="filterItems">
                         <option value="" disabled selected><i class="fas fa-filter"></i> Sort by</option>
                         <option v-for="role in this.roles" :value="role.role_id">{{ role.role_name }}</option>
-                        
+
                     </select>
                 </div>
 
             </div>
-            <h4> <i class="fas fa-list mt-2"></i>  Student Records</h4>
+            <h4> <i class="fas fa-list mt-2"></i>  Users</h4>
             <div class="student-buttons d-flex justify-content-end">
                 <div class="btn-group" role="group">
                     <!-- <button class="btn me-2" id="add-student-list-button" onclick="printTableData()">
@@ -48,7 +48,7 @@
                     <!-- <td style="color: red;"><b>Disabled</b></td> -->
                     <td>
                         <div class="btn-group" role="group" aria-label="Action buttons">
-                            <button type="button" class="btn">
+                            <button type="button" class="btn"  data-bs-toggle="modal" data-bs-target="#enableUserModal">
                                 <i style="color: green;" class="fas fa-check"></i> Enable
                             </button>
                             <button type="button" class="btn" ><i style="color: red;" class="fas fa-times"></i> Disable</button>
@@ -61,9 +61,25 @@
             </div>
         </div>
     </div>
+<!-- Enable User Modal -->
+    <div class="modal fade" id="enableUserModal" tabindex="-1" role="dialog" aria-labelledby="enableUserModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enableUserModalLabel">Enable User Account</h5>
+                </div>
+                <div class="modal-body">
+                        <Label>Are you sure you want to Enable this user's Account?</Label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="Enable" class="btn btn-success" >Enable</button>
+                        </div>
+                </div>
+            </div>
+        </div>
 
-
-        <!-- Modal -->
+        <!-- Add user Modal -->
     <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -133,7 +149,7 @@ export default{
             let filteredBySearch = this.users;
             if (this.searchTerm) {
                 const searchTermLower = this.searchTerm.toLowerCase();
-                filteredBySearch = filteredBySearch.filter(item => 
+                filteredBySearch = filteredBySearch.filter(item =>
                     item.fullname.toLowerCase().includes(searchTermLower) ||
                     item.id.toString().includes(this.searchTerm)
                 );
@@ -153,7 +169,7 @@ export default{
             );
 
 
-            
+
         },
         fetchData(){
             axios.get('/users_get')
@@ -182,7 +198,7 @@ export default{
 
                     });
                 });
-                
+
                 this.filtered_users =  this.users;
 
             })

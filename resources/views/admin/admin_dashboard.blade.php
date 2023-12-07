@@ -25,7 +25,7 @@
                             <i class="icons"></i>
                         </span>
                         <div class="ml-3">
-                        <p class="stat-label">Total Violations</p>
+                        <p class="stat-label">Total Violations Recorded</p>
                         <b><p class="stat-number">10</p></b>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                             <i class="icons"></i>
                         </span>
                         <div class="ml-3">
-                        <p class="stat-label">Total Violations</p>
+                        <p class="stat-label">Total  </p>
                         <b><p class="stat-number">10</p></b>
                         </div>
                     </div>
@@ -91,102 +91,4 @@
 
 @section('custom-script')
 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
-<script>
-    document.onreadystatechange = () => {
-        if (document.readyState === "complete") {
-            // Notification button and popover
-            const notificationButton = document.querySelector('.notification-button');
-            const popover = document.querySelector('.popover');
 
-            // Sidebar and toggle button
-            const toggleSidebarButton = document.getElementById('ssidebar-toggle');
-            const sidebar = document.getElementById('sidebarCollapse');
-            const content = document.querySelector('.content');
-            const icon = document.querySelector('#sidebar-toggle i');
-
-            // Buttons with chevron icons
-            const rotateButtons = document.querySelectorAll('.rotate-icon');
-
-            // Function to close any open btn-toggle elements
-            function closeOpenBtnToggle() {
-                const btnToggle = document.querySelectorAll('.btn-toggle');
-                btnToggle.forEach((button) => {
-                    const collapseTarget = button.getAttribute('data-bs-target');
-                    const collapseElement = document.querySelector(collapseTarget);
-                    if (collapseElement && collapseElement.classList.contains('show')) {
-                        collapseElement.classList.remove('show');
-                        rotateChevron(button);
-                        button.classList.remove('collapsed');
-                    }
-                });
-            }
-
-            // Function to rotate the chevron icon
-            function rotateChevron(button) {
-                const chevron = button.querySelector('.link-arrow i');
-                chevron.classList.toggle('fa-chevron-down');
-                chevron.classList.toggle('fa-chevron-up');
-            }
-
-            // Event listener for toggling the sidebar
-            toggleSidebarButton.addEventListener('click', function () {
-                const isCollapsed = sidebar.classList.contains('collapsed');
-                closeOpenBtnToggle();
-                sidebar.classList.toggle('collapsed');
-                content.classList.toggle('collapsed');
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-                if (!isCollapsed) {
-                    rotateButtons.forEach((button) => {
-                        if (!button.classList.contains('collapsed')) {
-                            const collapseTarget = button.getAttribute('data-bs-target');
-                            const collapseElement = document.querySelector(collapseTarget);
-                            if (collapseElement) {
-                                collapseElement.classList.add('show');
-                            }
-                        }
-                    });
-                }
-            });
-
-            // Event listener for rotating chevron icons on btn-toggle click
-            rotateButtons.forEach((button) => {
-                button.addEventListener('click', function () {
-                    this.classList.toggle('collapsed');
-                    rotateChevron(this);
-                    if (sidebar.classList.contains('collapsed')) {
-                        sidebar.classList.remove('collapsed');
-                        content.classList.remove('collapsed');
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        closeOpenBtnToggle();
-                    }
-                });
-            });
-
-            // Event listener for toggling the notification popover
-            notificationButton.addEventListener('click', () => {
-                popover.style.display = popover.style.display === 'block' ? 'none' : 'block';
-            });
-                    // Check screen width and collapse/expand sidebar accordingly
-                    function checkScreenWidth() {
-                if (window.innerWidth <= 768) { // Adjust the breakpoint as needed
-                    sidebar.classList.add('collapsed');
-                    content.classList.add('collapsed');
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                } else {
-                    sidebar.classList.remove('collapsed');
-                    content.classList.remove('collapsed');
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                }
-            }
-
-            // Initial check on page load
-            checkScreenWidth();
-        }
-    }
-</script>
-@endsection

@@ -69,7 +69,7 @@
                         </li>
                         <li class="mb-1">
                             <button class="btn btn-toggle align-items-center rounded events-button">
-                                <i class="fas fa-list-alt"></i>
+                                <i class="fas fa-folder-open"></i>
                                 <a href="/admin_violation_records">
                                 <span class="link-title">Record Violation</span>
                                 </a>

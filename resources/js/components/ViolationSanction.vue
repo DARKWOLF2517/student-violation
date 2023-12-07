@@ -6,7 +6,7 @@
                         <input type="text" placeholder="Search" v-model="searchTerm" @input="filterItems">
                     </div>
                 </div>
-    
+
                 <div class="col-md-4 col-sm-12" style="display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;">
                     <div class="select-dropdown">
                         <!-- First dropdown -->
@@ -18,9 +18,9 @@
                         </select>
                     </div>
                 </div>
-                <h4> <i class="fas fa-list mt-2"></i>  Violation records</h4>
+                <h4> <i class="fas fa-list mt-2"></i>  Violations and Sanctions</h4>
 
-    
+
                 <div class="table-container">
                     <table class="table table-hover">
                         <thead>
@@ -30,7 +30,7 @@
                             <th scope="col">Violation</th>
                             <th scope="col">Violation Status</th>
                             <th scope="col">Sanction</th>
-                            
+
                         </tr>
                         </thead>
                         <tbody>
@@ -48,14 +48,14 @@
                 </div>
             </div>
         </div>
-    
-    
-    
-    
+
+
+
+
     </template>
-    
+
     <script>
-    
+
     export default{
         props:['user_id'],
         data(){
@@ -84,7 +84,7 @@
             //     return (
             //         item.status.toString().includes(this.filterStatus)||
             //         item.student_name.toLowerCase().includes(this.searchTerm.toLowerCase())||
-            //         item.student_id.toString().includes(this.searchTerm) 
+            //         item.student_id.toString().includes(this.searchTerm)
 
             //     );
             // });
@@ -92,7 +92,7 @@
             let filteredBySearch = this.violation_list;
             if (this.searchTerm) {
                 const searchTermLower = this.searchTerm.toLowerCase();
-                filteredBySearch = filteredBySearch.filter(item => 
+                filteredBySearch = filteredBySearch.filter(item =>
                     item.student_name.toLowerCase().includes(searchTermLower) ||
                     item.student_id.toString().includes(this.searchTerm)
                 );
@@ -115,7 +115,7 @@
         },
 
             fetchViolationType(){
-    
+
                 axios.get(`/fetch_violation_type`)
                 .then(response => {
                     this.violation_type = response.data;
@@ -123,15 +123,15 @@
                 .catch(error => {
                     console.log(error)
                 });
-    
+
             },
             getStudents(){
                 axios.get('/get_students')
                 .then(response => {
-    
+
                     const students = response.data.student_belongs;
                     this.students_list = students.map(student => student.student_id);
-    
+
                 })
                 .catch(error => {
                     console.log(error)
@@ -176,27 +176,26 @@
                     this.violation_list = violationList;
                     this.filter_violation_status = this.violation_list;
                     // console.log(this.violation_list);
-    
+
                 })
                 .catch(error => {
                     console.log(error)
                 });
             },
         }
-    
+
     }
     </script>
-    
+
     <style>
-    
+
     .suggestion {
         cursor: pointer;
         padding: 5px;
         border: 1px solid #ccc;
     }
-    
+
     .suggestion:hover {
         background-color: #f0f0f0;
     }
     </style>
-    

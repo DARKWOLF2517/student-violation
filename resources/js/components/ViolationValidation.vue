@@ -47,7 +47,7 @@
                             </td>
 
                             <td>
-                                
+
                                 <div class="btn-group" role="group" aria-label="Action buttons" v-if="violation.status == 0 || this.role_id == 1">
                                     <button type="button" class="btn" data-toggle="modal" data-target="#addSanctionModal" @click="this.decision = 1,this.id = violation.violation_list_id,this.violation_type_id = violation.violation_type_id , this.fetchViolation()" > <i class="fas fa-check"></i> Approve</button>
                                     <button type="button" class="btn" data-toggle="modal" data-target="#confirmationDisaprove"  @click="this.decision = 2,this.id = violation.violation_list_id"><i class="fas fa-times"></i> Disapprove</button>
@@ -148,7 +148,7 @@
                 <p><b>Are you sure you want to Disapprove this Violation?</b></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-danger" @click="this.updateViolationStatus()" data-dismiss="modal">Dissaprove</button>
             </div>
             </div>
@@ -191,7 +191,7 @@ export default{
             let filteredBySearch = this.violation_list;
             if (this.searchTerm) {
                 const searchTermLower = this.searchTerm.toLowerCase();
-                filteredBySearch = filteredBySearch.filter(item => 
+                filteredBySearch = filteredBySearch.filter(item =>
                     item.student_name.toLowerCase().includes(searchTermLower) ||
                     item.student_id.toString().includes(this.searchTerm)
                 );
@@ -211,7 +211,7 @@ export default{
             );
 
 
-            
+
         },
         fetchViolation(){
             this.violation_list.forEach(violation=>{

@@ -5,9 +5,9 @@
     <div class="breadcrumbs">
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/login/org_dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/admin_dashboard">Dashboard</a></li>
             <li class="breadcrumb-item">Violation Officer</li>
-            <li class="breadcrumb-item active" aria-current="page">Testimonial</li>
+            <li class="breadcrumb-item active" aria-current="page">Testimonies</li>
         </ol>
         </nav>
     </div>

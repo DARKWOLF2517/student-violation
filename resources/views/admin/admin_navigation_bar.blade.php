@@ -55,7 +55,7 @@
                             <button class="btn btn-toggle align-items-center rounded dashboard-button">
                                 <img src="/asset/cmu-logo.png" alt="Dashboard Image" width="20" height="20">
                                 {{-- <a href=""> --}}
-                                <span class="link-title"> CMU-SV-MS</span>
+                                <span class="link-title"> CMU-SVMS</span>
                                 {{-- </a> --}}
                             </button>
                         </li>

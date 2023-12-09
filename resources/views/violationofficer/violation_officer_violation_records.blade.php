@@ -6,7 +6,7 @@
     <div class="breadcrumbs">
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/login/org_dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/violation_officer_dashboard">Dashboard</a></li>
             <li class="breadcrumb-item">Violation Officer</li>
             <li class="breadcrumb-item active" aria-current="page">Records</li>
         </ol>
@@ -15,7 +15,7 @@
         <violation-list
         user_id = {{Auth::id()}}
         role_id = {{session()->get('role_id')}}>
-        
+
 
         </violation-list>
     </div>

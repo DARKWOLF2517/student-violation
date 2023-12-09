@@ -38,7 +38,7 @@
                             <i class="icons"></i>
                         </span>
                         <div class="ml-3">
-                        <p class="stat-label">Total  </p>
+                        <p class="stat-label">Total Approve Violations </p>
                         <b><p class="stat-number">10</p></b>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <i class="icons"></i>
                         </span>
                         <div class="ml-3">
-                        <p class="stat-label">Total Violations</p>
+                        <p class="stat-label">Total Disapprove Violaions</p>
                         <b><p class="stat-number">10</p></b>
                         </div>
                     </div>

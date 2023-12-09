@@ -3,7 +3,7 @@
             <div class="form-group">
             <label for="username">Email</label>
             <div class="input-group">
-                <input type="text" class="form-control rounded-left" placeholder="Enter your username" required name="email" id="username" v-model="form.email" >
+                <input type="text" class="form-control rounded-left" placeholder="Enter your email address" required name="email" id="username" v-model="form.email" >
             </div>
             </div>
             <div class="form-group">
@@ -51,11 +51,11 @@ methods:{
                 }
                 else if(response.data == '0'){
                     this.error = '1';
-                    
+
                 }
                 else if(response.data == '4'){
                     this.error = '2';
-                    
+
                 }
                 console.log(response.data);
             })

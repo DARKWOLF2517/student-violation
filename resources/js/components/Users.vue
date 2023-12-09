@@ -71,7 +71,7 @@
                         <Label v-else-if="this.status_value.status == 0">Are you sure you want to Disable this user's Account?</Label>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="Enable" class="btn btn-success"  @click="this.updateStatus()" data-bs-dismiss="modal" v-if="this.status_value.status == 1">Enable</button>
                             <button type="Enable" class="btn btn-success"  @click="this.updateStatus()" data-bs-dismiss="modal" v-else-if="this.status_value.status == 0">Disable</button>
                         </div>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" >Save</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -162,7 +162,7 @@ export default{
             });
         },
 
-        
+
         filterItems() {
             console.log(this.filterStatus)
             let filteredBySearch = this.users;

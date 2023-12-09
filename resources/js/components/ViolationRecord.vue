@@ -104,7 +104,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
                     </div>
                 </form>
             </div>
@@ -153,7 +153,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" >Submit</button>
+                <button type="submit" class="btn btn-success" >Submit</button>
             </div>
             </form>
         </div>
@@ -173,7 +173,7 @@
                 <p><b>Are you sure you want to delete this Violation?</b></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-danger" @click="deleteViolation()" data-dismiss="modal">Delete</button>
             </div>
             </div>
@@ -235,7 +235,7 @@ export default{
             //     return (
             //         item.status.toString().includes(this.filterStatus)||
             //         item.student_name.toLowerCase().includes(this.searchTerm.toLowerCase())||
-            //         item.student_id.toString().includes(this.searchTerm) 
+            //         item.student_id.toString().includes(this.searchTerm)
 
             //     );
             // });
@@ -243,7 +243,7 @@ export default{
             let filteredBySearch = this.violation_list;
             if (this.searchTerm) {
                 const searchTermLower = this.searchTerm.toLowerCase();
-                filteredBySearch = filteredBySearch.filter(item => 
+                filteredBySearch = filteredBySearch.filter(item =>
                     item.student_name.toLowerCase().includes(searchTermLower) ||
                     item.student_id.toString().includes(this.searchTerm)
                 );
@@ -263,7 +263,7 @@ export default{
             );
 
 
-            
+
         },
         // sort() {
         //     //FILTER OF violation

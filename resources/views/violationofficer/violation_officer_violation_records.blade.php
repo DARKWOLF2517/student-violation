@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/violation_officer_dashboard">Dashboard</a></li>
             <li class="breadcrumb-item">Violation Officer</li>
-            <li class="breadcrumb-item active" aria-current="page">Records</li>
+            <li class="breadcrumb-item active" aria-current="page">Violation Slip Records</li>
         </ol>
         </nav>
     </div>

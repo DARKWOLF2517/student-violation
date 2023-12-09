@@ -6,7 +6,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/clerk_dashboard">Dashboard</a></li>
             <li class="breadcrumb-item">Clerk</li>
-            <li class="breadcrumb-item active" aria-current="page">Testimonial</li>
+            <li class="breadcrumb-item active" aria-current="page">Testimonies</li>
         </ol>
         </nav>
     </div>

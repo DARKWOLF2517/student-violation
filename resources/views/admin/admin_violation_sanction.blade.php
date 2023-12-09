@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/admin_dashboard">Dashboard</a></li>
             <li class="breadcrumb-item">Violation Officer</li>
-            <li class="breadcrumb-item active" aria-current="page">Records</li>
+            <li class="breadcrumb-item active" aria-current="page">The Violation and Assigned Sanctions</li>
         </ol>
         </nav>
     </div>

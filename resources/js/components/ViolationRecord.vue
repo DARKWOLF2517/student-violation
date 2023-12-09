@@ -76,8 +76,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" v-if="this.submit === this.submitViolation">Add Violation Report Slip</h3>
-                <h3 class="modal-title" v-else-if="this.submit === this.updateViolation">Edit Violation Report Slip</h3>
+                <h4 class="modal-title" v-if="this.submit === this.submitViolation">Add Violation Report Slip</h4>
+                <h4 class="modal-title" v-else-if="this.submit === this.updateViolation">Edit Violation Report Slip</h4>
             </div>
             <div class="modal-body">
                 <form @submit="this.submit">
@@ -118,7 +118,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Testimony</h4>
+                <h5 class="modal-title">Add Testimony</h5>
             </div>
             <div class="modal-body">
                 <form @submit="this.submitTestimonies()">

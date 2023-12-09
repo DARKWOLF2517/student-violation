@@ -1,7 +1,7 @@
 <template>
 <div class="mt-2">
         <div class="row head-container">
-            <h4> <i class="fas fa-list mt-2"></i>  Violation records</h4>
+            <h4> <i class="fas fa-list mt-2"></i>  Types of Violation and Sanctions</h4>
                 <div class="table-container">
                     <table class="table table-hover">
                         <thead>

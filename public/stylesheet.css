@@ -258,6 +258,11 @@ height: 75vh;
         top: 0;
         z-index: 1;
     }
+    .modal-title{
+        text-align: center;
+        margin: 0;
+        font-weight: bold;
+      }
 
 /* Media query for screens with a maximum width of 768 pixels */
 @media (max-width: 768px) {

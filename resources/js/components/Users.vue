@@ -64,7 +64,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="enableUserModalLabel">Enable User Account</h5>
+                    <h5 class="modal-title" id="enableUserModalLabel" v-if="this.status_value.status == 1">Enable User Account</h5>
+                    <h5 class="modal-title" id="enableUserModalLabel" v-else-if="this.status_value.status == 0">Disable User Account</h5>
                 </div>
                 <div class="modal-body">
                         <Label v-if="this.status_value.status == 1">Are you sure you want to Enable this user's Account?</Label>
@@ -84,7 +85,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Add new</h5>
+                    <h5 class="modal-title center-text" id="editModalLabel"> New User</h5>
                 </div>
                 <div class="modal-body">
                     <form @submit="this.sendData"  id="submitData" >
@@ -110,8 +111,8 @@
                         </select>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" >Save</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success" >Save</button>
                         </div>
                     </form>
                 </div>

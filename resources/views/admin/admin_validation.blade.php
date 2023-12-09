@@ -11,7 +11,9 @@
         </ol>
         </nav>
     </div>
-    <violation-validation>
+    <violation-validation
+    role_id = {{session()->get('role_id')}}
+    >
 
     </violation-validation>
 </div>

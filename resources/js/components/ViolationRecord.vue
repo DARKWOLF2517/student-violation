@@ -59,7 +59,7 @@
                             </td>
 
                             <td>
-                                <div class="btn-group" role="group" aria-label="Action buttons">
+                                <div class="btn-group" role="group" aria-label="Action buttons"  v-if="this.role_id == 1 || violations.status != 1">
                                     <button type="button" class="btn" data-toggle="modal" data-target="#addViolationRecord" @click="this.submit = this.updateViolation, this.id = violations.violation_list_id,this.fetchUpdate()"> <i class="fas fa-pen"></i> Edit</button>
                                     <button type="button" class="btn" @click="this.id = violations.violation_list_id " data-toggle="modal" data-target="#deleteConfirmation" ><i class="fas fa-trash"></i> Delete</button>
                                 </div>
@@ -187,7 +187,7 @@
 <script>
 
 export default{
-    props:['user_id'],
+    props:['user_id','role_id'],
     data(){
         return{
             submit: this.submitViolation,

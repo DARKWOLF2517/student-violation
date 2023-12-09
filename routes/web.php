@@ -91,6 +91,8 @@ Route::get('/violation_officer_sanction_list', function () {
 Route::post('/authenticate_user', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
+Route::put('/update_user_status', [UserController::class, 'updateUserStatus']);
+
 //violation route
 Route::get('/users_get', [UserController::class, 'getUsers']);
 Route::post('/create_user', [UserController::class, 'createUser']);

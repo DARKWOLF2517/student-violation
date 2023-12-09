@@ -13,7 +13,10 @@
         </nav>
     </div>
         <violation-list
-        user_id = {{Auth::id()}}>
+        user_id = {{Auth::id()}}
+        role_id = {{session()->get('role_id')}}
+        >
+        
 
         </violation-list>
     </div>

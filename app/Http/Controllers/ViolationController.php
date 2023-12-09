@@ -22,7 +22,6 @@ class ViolationController extends Controller
         $validatedData = $this->validate($request,[
             'id' => 'required',
             'violation_type_id' => 'required',
-            'remarks' => 'required',
             'officer' => 'required',
         ]);
 
@@ -31,7 +30,7 @@ class ViolationController extends Controller
             'student_id' => $validatedData['id'],
             'violation_officer_id' => $validatedData['officer'],
             'violation_type_id' => $validatedData['violation_type_id'],
-            'remarks'  => $validatedData['remarks'],
+            'remarks'  => $validatedData['remarks']??'',
             'status' => $validatedData['status']?? 0,
         ]);
         $violations->save();

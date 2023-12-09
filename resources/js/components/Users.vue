@@ -40,18 +40,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="users in this.filtered_users" :id="users.id">
-                    <th scope="row">{{ users.id }}</th>
-                    <td>{{ users.fullname }}</td>
-                    <td>{{ users.role }}</td>
-                    <td style="color: green;" v-if="users.status == 1"><b>Enabled</b></td>
-                    <td style="color: red;" v-else-if="users.status == 0"><b>Disabled</b></td>
+                <tr v-for="user in this.filtered_users" :id="users.id">
+                    <th scope="row">{{ user.id }}</th>
+                    <td>{{ user.fullname }}</td>
+                    <td>{{ user.role }}</td>
+                    <td style="color: green;" v-if="user.status == 1"><b>Enabled</b></td>
+                    <td style="color: red;" v-else-if="user.status == 0"><b>Disabled</b></td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="Action buttons">
-                            <button type="button" class="btn"  data-bs-toggle="modal" data-bs-target="#enableUserModal">
-                                <i style="color: green;" class="fas fa-check"></i> Enable
-                            </button>
-                            <button type="button" class="btn" ><i style="color: red;" class="fas fa-times"></i> Disable</button>
+                        <div class="btn-group" role="group" aria-label="Action buttons" v-if="user.id != this.user_id">
+                            <button type="button" class="btn"  data-bs-toggle="modal" data-bs-target="#enableUserModal" @click="this.status = user.status, this.status_value.status = 1 ,this.status_value.id = user.id"><i style="color: green;" class="fas fa-check"></i> Enable</button>
+                            <button type="button" class="btn"  data-bs-toggle="modal" data-bs-target="#enableUserModal" @click="this.status = user.status, this.status_value.status = 0 ,this.status_value.id = user.id"><i style="color: red;" class="fas fa-times"></i> Disable</button>
                         </div>
                     </td>
                 </tr>
@@ -69,11 +67,13 @@
                     <h5 class="modal-title" id="enableUserModalLabel">Enable User Account</h5>
                 </div>
                 <div class="modal-body">
-                        <Label>Are you sure you want to Enable this user's Account?</Label>
+                        <Label v-if="this.status_value.status == 1">Are you sure you want to Enable this user's Account?</Label>
+                        <Label v-else-if="this.status_value.status == 0">Are you sure you want to Disable this user's Account?</Label>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="Enable" class="btn btn-success" >Enable</button>
+                            <button type="Enable" class="btn btn-success"  @click="this.updateStatus()" data-bs-dismiss="modal" v-if="this.status_value.status == 1">Enable</button>
+                            <button type="Enable" class="btn btn-success"  @click="this.updateStatus()" data-bs-dismiss="modal" v-else-if="this.status_value.status == 0">Disable</button>
                         </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     <h5 class="modal-title" id="editModalLabel">Add new</h5>
                 </div>
                 <div class="modal-body">
-                    <form @submit.prevent="this.sendData"  id="submitData" >
+                    <form @submit="this.sendData"  id="submitData" >
                         <div class="form-group">
                         <label for="userId">User ID</label>
                         <input type="text" class="form-control" id="userId" v-model="formData.user_id">
@@ -124,8 +124,14 @@
 <script>
 
 export default{
+    props:['user_id'],
     data(){
         return{
+            status:'',
+            status_value:{
+                status: '',
+                id : '',
+            },
             users: [],
             formData: {
                 user_id: '',
@@ -140,10 +146,23 @@ export default{
         }
     },
     mounted(){
-        console.log('mounted');
+        console.log(this.user_id);
         this.fetchData();
     },
     methods:{
+
+        updateStatus(){
+            axios.put('/update_user_status', this.status_value)
+            .then(response => {
+                console.log(response.data);
+                this.fetchData();
+            })
+            .catch(error => {
+                console.log(error)
+            });
+        },
+
+        
         filterItems() {
             console.log(this.filterStatus)
             let filteredBySearch = this.users;
@@ -180,12 +199,12 @@ export default{
                 const user_roles = response.data.user_roles;
                 const role = response.data.roles;
                 this.roles = role;
+                this.users = [];
                 users.forEach(user => {
-                    console.log(user)
                     user_roles.forEach(user_role =>{
                         role.forEach(role=>{
 
-                            if (user_role.role_id ===  role.role_id){
+                            if (user_role.role_id ==  role.role_id ){
                                 if (user.id == user_role.user_id){
                                 this.users.push({
                                 id: user.id,

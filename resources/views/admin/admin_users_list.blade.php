@@ -12,7 +12,9 @@
           </ol>
           </nav>
       </div>
-    <user-table>
+    <user-table
+    user_id  = {{Auth::id()}}
+    >
 
     </user-table>
 </div>

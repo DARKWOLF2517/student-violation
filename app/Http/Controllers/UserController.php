@@ -54,6 +54,7 @@ class UserController extends Controller
             'id' => $validatedData['user_id'],
             'fullname' => $validatedData['name'],
             'email' => $validatedData['email'],
+            'status' => '1',
             'password' => Hash::make($validatedData['user_id']),
         ]);
         $users->save();
@@ -73,4 +74,16 @@ class UserController extends Controller
         return $request;
     }
 
+        
+    public function updateUserStatus(Request $request)
+    {           // Retrieve data from the request
+        $valueToUpdate = $request->input('status');
+        
+        // Find the specific record
+        $record = User::find($request['id']); // Replace $id with the specific ID of the record you want to update
+        
+        // Update the column
+        $record->update(['status' => $valueToUpdate]);
+        
+    }
 }

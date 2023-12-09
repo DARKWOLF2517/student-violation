@@ -48,7 +48,7 @@
 
                             <td>
                                 
-                                <div class="btn-group" role="group" aria-label="Action buttons" v-if="violation.status == 0">
+                                <div class="btn-group" role="group" aria-label="Action buttons" v-if="violation.status == 0 || this.role_id == 1">
                                     <button type="button" class="btn" data-toggle="modal" data-target="#addSanctionModal" @click="this.decision = 1,this.id = violation.violation_list_id,this.violation_type_id = violation.violation_type_id , this.fetchViolation()" > <i class="fas fa-check"></i> Approve</button>
                                     <button type="button" class="btn" data-toggle="modal" data-target="#confirmationDisaprove"  @click="this.decision = 2,this.id = violation.violation_list_id"><i class="fas fa-times"></i> Disapprove</button>
                                 </div>
@@ -86,12 +86,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="remarks" class="form-label">Remarks</label>
-                        <textarea  class="form-control" id="remarks" name="remarks" rows="3"  readonly v-model="sanction_modal.types_of_violation">
+                        <textarea  class="form-control" id="remarks" name="remarks" rows="3"  readonly v-model="sanction_modal.remarks">
                         </textarea>
                     </div>
                     <div class="mb-3">
                     <label for="sanctionTypeGiven" class="form-label">Select Sanction</label>
-                    <select class="form-select" id="sanctionTypeGiven" name="sanctionTypeGiven" v-model="sanction_modal.sanction">
+                    <select class="form-select" id="sanctionTypeGiven" name="sanctionTypeGiven" v-model="sanction_modal.sanction" required>
                         <option v-for="sanction in this.sanction_drop_down" :value="sanction.sanction_id">{{ sanction.description }}</option>
                     </select>
                 </div>
@@ -160,9 +160,10 @@
 <script>
 
 export default{
-    props:[],
+    props:['role_id'],
     data(){
         return{
+
             id: '',
             violation_type_id: '',
             decision: 0,
@@ -182,6 +183,7 @@ export default{
         this.showData();
         this.showTestimony();
         this.fetchSanction();
+        console.log(this.role_id)
     },
     methods:{
         filterItems() {

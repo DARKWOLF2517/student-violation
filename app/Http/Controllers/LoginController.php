@@ -22,7 +22,7 @@ class LoginController extends Controller
             $userRoles = UserRoles::where('user_id', Auth::id())->first();
             $user = User::where('id', Auth::id())->first();
             // dd($userOrganization->organization->name);
-            // session(['org_id' =>  $userRoles->student_org_id]);
+            session(['role_id' =>  $userRoles->role_id]);
             // session(['username' =>  $userRoles->organization->name]);
             if($user->status == 1){
                 if($userRoles->role_id == 1){
